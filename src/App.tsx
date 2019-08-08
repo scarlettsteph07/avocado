@@ -4,6 +4,7 @@ import styled from './styled'
 
 import {
   Body,
+  Footer,
   Header,
 } from './components/'
 
@@ -12,6 +13,7 @@ const App = () => {
     <AppStyles className="app">
       <Header mealTitle="avocado toast" iconSource="/img/avocado.png"/>
       <Body/>
+      <Footer/>
     </AppStyles>
   )
 }
