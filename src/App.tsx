@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+
+import styled from './styled'
+
+import {
+  Header,
+} from './components/'
 
 const App = () => {
   return (
-    <div className="app">
-      <header className="app__header">
-        <img src={logo} className="app__logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="app__link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AppStyles className="app">
+      <Header mealTitle="avocado toast" iconSource="/img/avocado.png"/>
+    </AppStyles>
+  )
 }
 
-export default App;
+export default App
+
+const AppStyles = styled.div`
+  background-color: ${({ theme }) => theme.oldPaper};
+`

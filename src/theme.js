@@ -26,11 +26,12 @@ export let theme = {
     tablet: '768px',
   },
 
-  baseFont: '"Trebuchet MS", sans-serif',
+  baseFont: '"Annie Use Your Telescope", cursive',
   secondaryFont: '"Helvetica Neue", Helvetica, sans-serif',
 
   textPrimary:              '#202020',
   transparent:              'transparent',
   black:                    '#000000',
   white:                    '#ffffff',
+  oldPaper:                 '#f2eecb',
 }

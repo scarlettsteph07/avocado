@@ -35,6 +35,7 @@ type Theme = {
   transparent: string,
   black: string,
   white: string,
+  oldPaper: string,
 }
 
 export default styled as CreateStyled<Theme>
