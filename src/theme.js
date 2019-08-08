@@ -33,5 +33,7 @@ export let theme = {
   transparent:              'transparent',
   black:                    '#000000',
   white:                    '#ffffff',
-  oldPaper:                 '#f2eecb',
+  oldPaper:                 '#F7F6E8',
+  oldPaper2:                '#f2eecb',
+  snowDrift:                '#E3E3DC',
 }
