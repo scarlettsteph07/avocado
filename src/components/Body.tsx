@@ -70,6 +70,15 @@ class Body extends React.Component<Props, State> {
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
+  updateNumberOfIngredients = (numOfOptionalIngredients: number) => {
+    this.setState(prevState => ({
+      payload: {
+        ...prevState.payload,
+        numOfOptionalIngredients,
+      }
+    }), () => this.fetchIngredients(this.setPayload()))
+  }
+
   render() {
     const { isLoading, payload } = this.state
     return (
@@ -77,6 +86,8 @@ class Body extends React.Component<Props, State> {
       <Settings
         updateIsCarnivore={this.updateIsCarnivore}
         isCarnivore={payload.isCarnivore}
+        updateNumberOfIngredients={this.updateNumberOfIngredients}
+        numOfOptionalIngredients={payload.numOfOptionalIngredients}
       />
       <IngredientsList ingredients={this.state.ingredients} />
       { !isLoading &&
