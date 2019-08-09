@@ -5,6 +5,7 @@ import styled from '../styled'
 import { API_URL } from '../lib/appConstants'
 import {
   IngredientsList,
+  Settings,
 } from './'
 import { StyledButton } from './styled/'
 
@@ -60,10 +61,23 @@ class Body extends React.Component<Props, State> {
     this.fetchIngredients(this.setPayload())
   }
 
+  updateIsCarnivore = () => {
+    this.setState(prevState => ({
+      payload: {
+        ...prevState.payload,
+        isCarnivore: !this.state.payload.isCarnivore,
+      }
+    }), () => this.fetchIngredients(this.setPayload()))
+  }
+
   render() {
-    const { isLoading } = this.state
+    const { isLoading, payload } = this.state
     return (
     <BodyStyles className="body">
+      <Settings
+        updateIsCarnivore={this.updateIsCarnivore}
+        isCarnivore={payload.isCarnivore}
+      />
       <IngredientsList ingredients={this.state.ingredients} />
       { !isLoading &&
         <RandomizeButton
