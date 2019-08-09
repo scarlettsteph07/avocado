@@ -3,8 +3,10 @@ import _ from 'lodash'
 
 import styled from '../styled'
 
+import { Ingredient } from '../types/'
+
 interface Props {
-  ingredients: Object,
+  ingredients: Array<Ingredient>,
 }
 
 export const IngredientsList = ({ ingredients }: Props) => {
