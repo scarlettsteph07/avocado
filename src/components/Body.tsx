@@ -6,6 +6,7 @@ import { API_URL } from '../lib/appConstants'
 import {
   IngredientsList,
 } from './'
+import { StyledButton } from './styled/'
 
 import { Ingredient, Payload } from '../types/'
 
@@ -55,10 +56,23 @@ class Body extends React.Component<Props, State> {
     })
   }
 
+  handleOnButtonClick = () => {
+    this.fetchIngredients(this.setPayload())
+  }
+
   render() {
+    const { isLoading } = this.state
     return (
     <BodyStyles className="body">
       <IngredientsList ingredients={this.state.ingredients} />
+      { !isLoading &&
+        <RandomizeButton
+          className="randomize-button"
+          onClick={(this.handleOnButtonClick)}
+        >
+          Randomize!
+        </RandomizeButton>
+      }
     </BodyStyles>
   )}
 }
@@ -80,5 +94,15 @@ const BodyStyles = styled.div`
   justify-content: flex-start;
   @media (min-width: ${({ theme }) => theme.medium.start} ) {
     font-size: 70px;
+  }
+`
+
+const RandomizeButton = styled(StyledButton)`
+  min-width: 25%;
+  height: auto;
+  margin: 25px auto;
+  font-size: 25px;
+  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+    font-size: 50px;
   }
 `
