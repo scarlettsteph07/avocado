@@ -33,11 +33,15 @@ type Theme = {
 
   textPrimary: string,
   transparent: string,
+  transparentOverlay: string,
+  semiTransparentOverlay: string,
   black: string,
   white: string,
   oldPaper: string,
   oldPaper2: string,
   snowDrift: string,
+  emerald: string,
+  lightGray: string,
 }
 
 export default styled as CreateStyled<Theme>

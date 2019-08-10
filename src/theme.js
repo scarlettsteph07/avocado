@@ -31,9 +31,13 @@ export let theme = {
 
   textPrimary:              '#202020',
   transparent:              'transparent',
+  transparentOverlay:       'rgba(0,0,0,0.2)',
+  semiTransparentOverlay:   'rgba(0,0,0,0.05)',
   black:                    '#000000',
   white:                    '#ffffff',
   oldPaper:                 '#F7F6E8',
   oldPaper2:                '#f2eecb',
   snowDrift:                '#E3E3DC',
+  emerald:                  '#4ed164',
+  lightGray:                '#D9DADC',
 }
