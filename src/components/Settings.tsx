@@ -51,6 +51,8 @@ export const Settings = ({
 const SettingsStyles = styled.div`
   display: flex;
   flex-flow: column;
+  align-self: center;
+  padding: 25px 0;
   .settings {
     &__carnivore-switch {
       position: relative;
@@ -97,5 +99,20 @@ const SettingsStyles = styled.div`
       left: 20px;
       box-shadow: -2px 4px 3px ${({ theme }) => theme.semiTransparentOverlay};
     }
+  }
+
+  label {
+    width: 50%;
+    display: inline-block;
+    text-align: right;
+    clear: left;
+    @media (min-width: ${({ theme }) => theme.medium.start} ) {
+      width: 400px;
+    }
+  }
+
+  input {
+      display: inline-block;
+      margin-left: 25px;
   }
 `

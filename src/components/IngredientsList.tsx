@@ -29,6 +29,7 @@ const IngredientsListStyles = styled.div`
   height: 100%;
   display: flex;
   flex-flow: column;
+  padding: 25px 0;
 
   .ingredients {
     &__list {

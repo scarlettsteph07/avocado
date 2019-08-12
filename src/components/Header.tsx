@@ -25,6 +25,8 @@ const hithere = keyframes`
 
 const HeaderStyles = styled.header`
   height: auto;
+  text-align: center;
+  padding: 25px 0;
   font-size: calc(10px + 2vmin);
   color: ${({ theme }) => theme.textPrimary};
   display: flex;
@@ -33,8 +35,7 @@ const HeaderStyles = styled.header`
   justify-content: flex-start;
   @media (min-width: ${({ theme }) => theme.medium.start} ) {
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .header {
