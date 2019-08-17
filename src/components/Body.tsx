@@ -9,7 +9,11 @@ import {
 } from './'
 import { StyledButton } from './styled/'
 
-import { Ingredient, Payload } from '../types/'
+import {
+  Ingredient,
+  Payload,
+  DietPreference
+} from '../types/'
 
 interface Props {
 
@@ -73,6 +77,15 @@ class Body extends React.Component<Props, State> {
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
+  updateDietPreference = (newDietPreference: DietPreference) => {
+    this.setState(prevState => ({
+      payload: {
+        ...prevState.payload,
+        dietPreference: newDietPreference,
+      }
+    }), () => this.fetchIngredients(this.setPayload()))
+  }
+
   updateNumberOfIngredients = (numOfOptionalIngredients: number) => {
     this.setState(prevState => ({
       payload: {
@@ -90,6 +103,7 @@ class Body extends React.Component<Props, State> {
         updateIsCarnivore={this.updateIsCarnivore}
         isCarnivore={payload.isCarnivore}
         dietPreference={payload.dietPreference}
+        updateDietPreference={this.updateDietPreference}
         updateNumberOfIngredients={this.updateNumberOfIngredients}
         numOfOptionalIngredients={payload.numOfOptionalIngredients}
       />

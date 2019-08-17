@@ -1,4 +1,7 @@
 import React from 'react'
+import Dropdown from 'react-dropdown'
+
+import { DIET_PREFERENCES } from '../lib/appConstants'
 
 import styled from '../styled'
 import { DietPreference } from '../types/'
@@ -7,6 +10,7 @@ interface Props {
   updateIsCarnivore: Function,
   isCarnivore: boolean,
   dietPreference: DietPreference,
+  updateDietPreference: Function,
   updateNumberOfIngredients: Function,
   numOfOptionalIngredients: number,
 }
@@ -15,12 +19,17 @@ export const Settings = ({
   updateIsCarnivore,
   isCarnivore,
   dietPreference,
+  updateDietPreference,
   updateNumberOfIngredients,
   numOfOptionalIngredients,
 }: Props) => {
   const handleCarnivoreSwitchClick = (e: React.FormEvent<HTMLInputElement>): void => {
     e.preventDefault()
     updateIsCarnivore()
+  }
+
+  const handleDietPreferencesOnChange = (e: any) => {
+    updateDietPreference(e.value)
   }
 
   const handleIngredientsOnChange = (e: any) => {
@@ -36,6 +45,14 @@ export const Settings = ({
           className={`settings__carnivore-switch ${isCarnivore ? 'checked' : ''}`}
           type="checkbox"
           onClick={handleCarnivoreSwitchClick}
+        />
+      </div>
+      <div className='settings__diet-dropdown'>
+        <Dropdown
+          options={DIET_PREFERENCES}
+          value={dietPreference}
+          placeholder='Select an option'
+          onChange={handleDietPreferencesOnChange}
         />
       </div>
       <div>
@@ -78,6 +95,9 @@ const SettingsStyles = styled.div`
         border-radius: 50%;
         box-shadow: 2px 4px 6px ${({ theme }) => theme.transparentOverlay };
       }
+    }
+    &__diet-dropdown {
+      border: 1px solid;
     }
     &__ingredients-input {
       width: 100px;
