@@ -22,11 +22,12 @@ interface State {
 }
 
 class Body extends React.Component<Props, State> {
-  state = {
+  state: State = {
     isLoading: false,
     ingredients: [],
     payload: {
       isCarnivore: false,
+      dietPreference: 'carnivore',
       numOfOptionalIngredients: 1,
     }
   }
@@ -37,9 +38,11 @@ class Body extends React.Component<Props, State> {
   }
 
   setPayload = (): Payload => {
+    const { payload } = this.state
     return {
-      "isCarnivore": this.state.payload.isCarnivore,
-      "numOfOptionalIngredients": this.state.payload.numOfOptionalIngredients,
+      "isCarnivore": payload.isCarnivore,
+      "dietPreference": payload.dietPreference,
+      "numOfOptionalIngredients": payload.numOfOptionalIngredients,
     }
   }
 
@@ -86,6 +89,7 @@ class Body extends React.Component<Props, State> {
       <Settings
         updateIsCarnivore={this.updateIsCarnivore}
         isCarnivore={payload.isCarnivore}
+        dietPreference={payload.dietPreference}
         updateNumberOfIngredients={this.updateNumberOfIngredients}
         numOfOptionalIngredients={payload.numOfOptionalIngredients}
       />

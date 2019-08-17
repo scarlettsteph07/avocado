@@ -1,10 +1,12 @@
 import React from 'react'
 
 import styled from '../styled'
+import { DietPreference } from '../types/'
 
 interface Props {
   updateIsCarnivore: Function,
   isCarnivore: boolean,
+  dietPreference: DietPreference,
   updateNumberOfIngredients: Function,
   numOfOptionalIngredients: number,
 }
@@ -12,6 +14,7 @@ interface Props {
 export const Settings = ({
   updateIsCarnivore,
   isCarnivore,
+  dietPreference,
   updateNumberOfIngredients,
   numOfOptionalIngredients,
 }: Props) => {
