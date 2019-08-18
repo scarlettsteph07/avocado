@@ -16,7 +16,7 @@ export const IngredientsList = ({ ingredients }: Props) => {
         {
           _.map(
             ingredients,
-            (ingredient, i) => <div key={i} className="ingredients__list__item">{ingredient.name}</div>
+            (ingredient, i) => <div key={i} className="ingredients__list__item">{ingredient.style}</div>
           )
         }
       </div>
@@ -40,6 +40,7 @@ const IngredientsListStyles = styled.div`
       justify-content: space-between;
       align-items: center;
       align-content: space-evenly;
+      text-transform: capitalize;
       &__item {
         display: flex;
         justify-content: center;
