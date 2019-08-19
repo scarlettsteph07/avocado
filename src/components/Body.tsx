@@ -110,9 +110,6 @@ const BodyStyles = styled.div`
   box-sizing: border-box;
   font-size: 25px;
   color: ${({ theme }) => theme.textPrimary};
-  background: white;
-  background: linear-gradient(0, ${({theme}) => theme.snowDrift} 8%, ${({theme}) => theme.oldPaper} 8%) 0 57px;
-  background-size: 100% 30px;
   display: flex;
   flex-flow: column;
   align-items: center;
