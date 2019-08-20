@@ -85,7 +85,7 @@ const SettingsStyles = styled.div`
       font-family: ${({ theme }) => theme.baseFont};
       font-size: 25px;
       text-align: center;
-      @media (min-width: ${({ theme }) => theme.medium.start} ) {
+      @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
         height: 70px;
         font-size: 70px;
       }
@@ -106,7 +106,7 @@ const SettingsStyles = styled.div`
     display: inline-block;
     text-align: right;
     clear: left;
-    @media (min-width: ${({ theme }) => theme.medium.start} ) {
+    @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
       width: 400px;
     }
   }

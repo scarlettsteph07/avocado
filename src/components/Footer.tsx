@@ -20,7 +20,7 @@ const FooterStyles = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     height: 70px;
   }
 `

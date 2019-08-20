@@ -33,7 +33,7 @@ const HeaderStyles = styled.header`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     flex-direction: row;
     justify-content: center;
   }
@@ -46,13 +46,13 @@ const HeaderStyles = styled.header`
       height: 70px;
       pointer-events: none;
       animation: ${hithere} 1s ease infinite;
-      @media (min-width: ${({ theme }) => theme.medium.start} ) {
+      @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
         height: 160px;
       }
     }
     &__title {
       text-transform: capitalize;
-      @media (min-width: ${({ theme }) => theme.medium.start} ) {
+      @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
         font-size: 100px;
       }
     }

@@ -82,22 +82,22 @@ class Body extends React.Component<Props, State> {
   render() {
     const { isLoading, payload } = this.state
     return (
-    <BodyStyles className="body">
-      <Settings
-        updateIsCarnivore={this.updateIsCarnivore}
-        isCarnivore={payload.isCarnivore}
-        updateNumberOfIngredients={this.updateNumberOfIngredients}
-        numOfOptionalIngredients={payload.numOfOptionalIngredients}
-      />
-      <IngredientsList ingredients={this.state.ingredients} />
-      { !isLoading &&
-        <RandomizeButton
-          className="randomize-button"
-          onClick={(this.handleOnButtonClick)}
-        >
-          Randomize!
-        </RandomizeButton>
-      }
+      <BodyStyles className="body">
+        <Settings
+          updateIsCarnivore={this.updateIsCarnivore}
+          isCarnivore={payload.isCarnivore}
+          updateNumberOfIngredients={this.updateNumberOfIngredients}
+          numOfOptionalIngredients={payload.numOfOptionalIngredients}
+        />
+        <IngredientsList ingredients={this.state.ingredients} />
+        { !isLoading &&
+            <RandomizeButton
+              className="randomize-button"
+              onClick={(this.handleOnButtonClick)}
+            >
+              Randomize!
+              </RandomizeButton>
+            }
     </BodyStyles>
   )}
 }
@@ -105,8 +105,6 @@ class Body extends React.Component<Props, State> {
 export { Body }
 
 const BodyStyles = styled.div`
-  width: 100%;
-  min-height: 90vh;
   box-sizing: border-box;
   font-size: 25px;
   color: ${({ theme }) => theme.textPrimary};
@@ -114,7 +112,7 @@ const BodyStyles = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: flex-start;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     font-size: 70px;
   }
 `
@@ -122,9 +120,8 @@ const BodyStyles = styled.div`
 const RandomizeButton = styled(StyledButton)`
   min-width: 25%;
   height: auto;
-  margin: 25px auto;
   font-size: 25px;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     font-size: 50px;
   }
 `
