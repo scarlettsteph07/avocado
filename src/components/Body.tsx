@@ -8,6 +8,10 @@ import {
   Settings,
 } from './'
 import { StyledButton } from './styled/'
+import {
+  StyledSlatInner,
+  StyledSlatOuter,
+} from './styled/'
 
 import { Ingredient, Payload } from '../types/'
 
@@ -82,22 +86,26 @@ class Body extends React.Component<Props, State> {
   render() {
     const { isLoading, payload } = this.state
     return (
-      <BodyStyles className="body">
-        <Settings
-          updateIsCarnivore={this.updateIsCarnivore}
-          isCarnivore={payload.isCarnivore}
-          updateNumberOfIngredients={this.updateNumberOfIngredients}
-          numOfOptionalIngredients={payload.numOfOptionalIngredients}
-        />
-        <IngredientsList ingredients={this.state.ingredients} />
-        { !isLoading &&
+    <BodyStyles className="body">
+      <StyledSlatOuter className="body__outer">
+        <StyledSlatInner className="body__inner">
+          <IngredientsList ingredients={this.state.ingredients} />
+          <Settings
+            updateIsCarnivore={this.updateIsCarnivore}
+            isCarnivore={payload.isCarnivore}
+            updateNumberOfIngredients={this.updateNumberOfIngredients}
+            numOfOptionalIngredients={payload.numOfOptionalIngredients}
+          />
+          { !isLoading &&
             <RandomizeButton
               className="randomize-button"
               onClick={(this.handleOnButtonClick)}
             >
               Randomize!
-              </RandomizeButton>
+            </RandomizeButton>
             }
+          </StyledSlatInner>
+        </StyledSlatOuter>
     </BodyStyles>
   )}
 }
@@ -105,20 +113,30 @@ class Body extends React.Component<Props, State> {
 export { Body }
 
 const BodyStyles = styled.div`
+  min-height: 75vh;
   box-sizing: border-box;
   font-size: 25px;
   color: ${({ theme }) => theme.textPrimary};
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: flex-start;
   @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     font-size: 70px;
+  }
+
+  .body {
+    &__outer {
+      min-height: 75vh;
+    }
+    &__inner {
+      min-height: 75vh;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 `
 
 const RandomizeButton = styled(StyledButton)`
-  min-width: 25%;
+  width: 100%;
   height: auto;
   font-size: 25px;
   @media (min-width: ${({ theme }) => theme.devices.tablet} ) {

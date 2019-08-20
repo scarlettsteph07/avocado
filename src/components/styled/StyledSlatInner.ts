@@ -1,10 +1,11 @@
 import styled from '../../styled'
 
 export const StyledSlatInner = styled.div`
-  margin: auto;
+  margin: 0 20px;
   overflow: hidden;
-  padding: 40px 0;
+  padding: 25px 0;
   @media (min-width: ${({theme}) => theme.large.start}) {
+    margin: auto;
     width: 100%;
     max-width: ${({theme}) => theme.large.inner};
   };
