@@ -23,7 +23,7 @@ type Theme = {
     inner: string,
     start: string,
   },
-  electionCenter: {
+  devices: {
     desktop: string,
     tablet: string,
   },
@@ -37,9 +37,6 @@ type Theme = {
   semiTransparentOverlay: string,
   black: string,
   white: string,
-  oldPaper: string,
-  oldPaper2: string,
-  snowDrift: string,
   emerald: string,
   lightGray: string,
 }

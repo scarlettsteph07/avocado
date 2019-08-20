@@ -6,7 +6,6 @@ export const StyledButton = styled.button`
   background-position: 20px center;
   background-repeat: no-repeat;
   background-size: 15px 14px;
-  border-radius: 50px;
   box-shadow: none;
   box-sizing: border-box;
   color: black;

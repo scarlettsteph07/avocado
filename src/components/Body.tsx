@@ -8,6 +8,10 @@ import {
   Settings,
 } from './'
 import { StyledButton } from './styled/'
+import {
+  StyledSlatInner,
+  StyledSlatOuter,
+} from './styled/'
 
 import {
   Ingredient,
@@ -99,23 +103,27 @@ class Body extends React.Component<Props, State> {
     const { isLoading, payload } = this.state
     return (
     <BodyStyles className="body">
-      <Settings
-        updateIsCarnivore={this.updateIsCarnivore}
-        isCarnivore={payload.isCarnivore}
-        dietPreference={payload.dietPreference}
-        updateDietPreference={this.updateDietPreference}
-        updateNumberOfIngredients={this.updateNumberOfIngredients}
-        numOfOptionalIngredients={payload.numOfOptionalIngredients}
-      />
-      <IngredientsList ingredients={this.state.ingredients} />
-      { !isLoading &&
-        <RandomizeButton
-          className="randomize-button"
-          onClick={(this.handleOnButtonClick)}
-        >
-          Randomize!
-        </RandomizeButton>
-      }
+      <StyledSlatOuter className="body__outer">
+        <StyledSlatInner className="body__inner">
+          <IngredientsList ingredients={this.state.ingredients} />
+          <Settings
+            updateIsCarnivore={this.updateIsCarnivore}
+            isCarnivore={payload.isCarnivore}
+            dietPreference={payload.dietPreference}
+            updateDietPreference={this.updateDietPreference}
+            updateNumberOfIngredients={this.updateNumberOfIngredients}
+            numOfOptionalIngredients={payload.numOfOptionalIngredients}
+          />
+          { !isLoading &&
+            <RandomizeButton
+              className="randomize-button"
+              onClick={(this.handleOnButtonClick)}
+            >
+              Randomize!
+            </RandomizeButton>
+            }
+          </StyledSlatInner>
+        </StyledSlatOuter>
     </BodyStyles>
   )}
 }
@@ -123,29 +131,33 @@ class Body extends React.Component<Props, State> {
 export { Body }
 
 const BodyStyles = styled.div`
-  width: 100%;
-  min-height: 90vh;
+  min-height: 75vh;
   box-sizing: border-box;
   font-size: 25px;
   color: ${({ theme }) => theme.textPrimary};
-  background: white;
-  background: linear-gradient(0, ${({theme}) => theme.snowDrift} 8%, ${({theme}) => theme.oldPaper} 8%) 0 57px;
-  background-size: 100% 30px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: flex-start;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     font-size: 70px;
+  }
+
+  .body {
+    &__outer {
+      min-height: 75vh;
+    }
+    &__inner {
+      min-height: 75vh;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 `
 
 const RandomizeButton = styled(StyledButton)`
-  min-width: 25%;
+  width: 100%;
   height: auto;
-  margin: 25px auto;
   font-size: 25px;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
     font-size: 50px;
   }
 `

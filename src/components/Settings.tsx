@@ -1,9 +1,15 @@
 import React from 'react'
 import Dropdown from 'react-dropdown'
+import _ from 'lodash'
 
 import { DIET_PREFERENCES } from '../lib/appConstants'
 
 import styled from '../styled'
+import {
+  StyledSlatInner,
+  StyledSlatOuter,
+} from './styled/'
+
 import { DietPreference } from '../types/'
 
 interface Props {
@@ -39,41 +45,47 @@ export const Settings = ({
 
   return (
     <SettingsStyles className="settings">
-      <div>
-        <label>Carnivore: </label>
-        <input
-          className={`settings__carnivore-switch ${isCarnivore ? 'checked' : ''}`}
-          type="checkbox"
-          onClick={handleCarnivoreSwitchClick}
-        />
-      </div>
-      <div className='settings__diet-dropdown'>
-        <Dropdown
-          options={DIET_PREFERENCES}
-          value={dietPreference}
-          placeholder='Select an option'
-          onChange={handleDietPreferencesOnChange}
-        />
-      </div>
-      <div>
-        <label>Number of Ingredients:</label>
-        <input
-          className="settings__ingredients-input"
-          type="number"
-          value={numOfOptionalIngredients}
-          onChange={handleIngredientsOnChange}
-        />
-      </div>
+      <StyledSlatOuter>
+        <StyledSlatInner className="settings__inner">
+          <div>
+            <label>Carnivore: </label>
+            <input
+              className={`settings__carnivore-switch ${isCarnivore ? 'checked' : ''}`}
+              type="checkbox"
+              onClick={handleCarnivoreSwitchClick}
+            />
+          </div>
+          <div className='settings__diet-dropdown'>
+            <Dropdown
+              options={DIET_PREFERENCES}
+              value={dietPreference}
+              placeholder='Select an option'
+              onChange={handleDietPreferencesOnChange}
+            />
+          </div>
+          <div>
+            <label>{_.startCase("number of ingredients:")}</label>
+            <input
+              className="settings__ingredients-input"
+              type="number"
+              value={numOfOptionalIngredients}
+              onChange={handleIngredientsOnChange}
+            />
+          </div>
+        </StyledSlatInner>
+      </StyledSlatOuter>
     </SettingsStyles>
   )
 }
 
 const SettingsStyles = styled.div`
+  width: 100%;
   display: flex;
   flex-flow: column;
-  align-self: center;
-  padding: 25px 0;
   .settings {
+    &__inner {
+      margin: 0;
+    }
     &__carnivore-switch {
       position: relative;
       -webkit-appearance: none;
@@ -108,7 +120,7 @@ const SettingsStyles = styled.div`
       font-family: ${({ theme }) => theme.baseFont};
       font-size: 25px;
       text-align: center;
-      @media (min-width: ${({ theme }) => theme.medium.start} ) {
+      @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
         height: 70px;
         font-size: 70px;
       }
@@ -125,17 +137,14 @@ const SettingsStyles = styled.div`
   }
 
   label {
-    width: 50%;
-    display: inline-block;
     text-align: right;
     clear: left;
-    @media (min-width: ${({ theme }) => theme.medium.start} ) {
+    @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
       width: 400px;
     }
   }
 
   input {
-      display: inline-block;
       margin-left: 25px;
   }
 `

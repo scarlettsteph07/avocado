@@ -10,16 +10,12 @@ import {
 
 const App = () => {
   return (
-    <AppStyles className="app">
-      <Header mealTitle="avocado toast" iconSource="/img/avocado.png"/>
+    <div className="app">
+      <Header mealTitle="toast &amp; avocado" iconSource="/img/avocado.png"/>
       <Body/>
       <Footer/>
-    </AppStyles>
+    </div>
   )
 }
 
 export default App
-
-const AppStyles = styled.div`
-  background-color: ${({ theme }) => theme.oldPaper};
-`

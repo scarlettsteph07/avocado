@@ -21,7 +21,7 @@ export let theme = {
     inner: '1140px',
     start: '1441px'
   },
-  electionCenter: {
+  devices: {
     desktop: '926px',
     tablet: '768px',
   },
@@ -35,9 +35,6 @@ export let theme = {
   semiTransparentOverlay:   'rgba(0,0,0,0.05)',
   black:                    '#000000',
   white:                    '#ffffff',
-  oldPaper:                 '#F7F6E8',
-  oldPaper2:                '#f2eecb',
-  snowDrift:                '#E3E3DC',
   emerald:                  '#4ed164',
   lightGray:                '#D9DADC',
 }

@@ -2,6 +2,10 @@ import React from 'react'
 import _ from 'lodash'
 
 import styled from '../styled'
+import {
+  StyledSlatInner,
+  StyledSlatOuter,
+} from './styled/'
 
 import { Ingredient } from '../types/'
 
@@ -12,14 +16,16 @@ interface Props {
 export const IngredientsList = ({ ingredients }: Props) => {
   return (
     <IngredientsListStyles className="ingredients">
-      <div className="ingredients__list">
-        {
-          _.map(
-            ingredients,
-            (ingredient, i) => <div key={i} className="ingredients__list__item">{ingredient.style}</div>
-          )
-        }
-      </div>
+      <StyledSlatOuter>
+        <StyledSlatInner className="ingredients__inner">
+          {
+            _.map(
+              ingredients,
+              (ingredient, i) => <div key={i} className="ingredients__list__item">{_.startCase(ingredient.name)}</div>
+            )
+          }
+        </StyledSlatInner>
+      </StyledSlatOuter>
     </IngredientsListStyles>
   )
 }
@@ -29,22 +35,21 @@ const IngredientsListStyles = styled.div`
   height: 100%;
   display: flex;
   flex-flow: column;
-  padding: 25px 0;
+  align-items: flex-start;
 
   .ingredients {
-    &__list {
-      width: 100%;
-      height: auto;
+    &__inner {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       align-content: space-evenly;
-      text-transform: capitalize;
-      &__item {
-        display: flex;
-        justify-content: center;
-      }
+      margin: 0;
+    }
+    &__list__item {
+      padding-bottom: 25px;
+      display: flex;
+      justify-content: center;
     }
   }
 `

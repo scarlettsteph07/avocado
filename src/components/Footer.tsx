@@ -1,7 +1,10 @@
 import React from 'react'
 
 import styled from '../styled'
-
+import {
+  StyledSlatInner,
+  StyledSlatOuter,
+} from './styled/'
 interface Props {
 
 }
@@ -10,17 +13,21 @@ export const Footer = () => {
   const currentTime = new Date()
   return (
     <FooterStyles className='footer'>
-      &copy; {currentTime.getFullYear()} scarlettsteph07. All Rights Reserved.
+      <StyledSlatOuter>
+        <StyledSlatInner className='footer__inner'>
+          &copy; {currentTime.getFullYear()} scarlettsteph07. All Rights Reserved.
+        </StyledSlatInner>
+      </StyledSlatOuter>
     </FooterStyles>
   )
 }
 
 const FooterStyles = styled.footer`
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: ${({ theme }) => theme.medium.start} ) {
-    height: 70px;
+  .footer {
+    &__inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 `
