@@ -34,7 +34,6 @@ class Body extends React.Component<Props, State> {
     isLoading: false,
     ingredients: [],
     payload: {
-      isCarnivore: false,
       dietPreference: 'carnivore',
       numOfOptionalIngredients: 1,
     }
@@ -48,7 +47,6 @@ class Body extends React.Component<Props, State> {
   setPayload = (): Payload => {
     const { payload } = this.state
     return {
-      "isCarnivore": payload.isCarnivore,
       "dietPreference": payload.dietPreference,
       "numOfOptionalIngredients": payload.numOfOptionalIngredients,
     }
@@ -70,15 +68,6 @@ class Body extends React.Component<Props, State> {
 
   handleOnButtonClick = () => {
     this.fetchIngredients(this.setPayload())
-  }
-
-  updateIsCarnivore = () => {
-    this.setState(prevState => ({
-      payload: {
-        ...prevState.payload,
-        isCarnivore: !this.state.payload.isCarnivore,
-      }
-    }), () => this.fetchIngredients(this.setPayload()))
   }
 
   updateDietPreference = (newDietPreference: DietPreference) => {
@@ -107,8 +96,6 @@ class Body extends React.Component<Props, State> {
         <StyledSlatInner className="body__inner">
           <IngredientsList ingredients={this.state.ingredients} />
           <Settings
-            updateIsCarnivore={this.updateIsCarnivore}
-            isCarnivore={payload.isCarnivore}
             dietPreference={payload.dietPreference}
             updateDietPreference={this.updateDietPreference}
             updateNumberOfIngredients={this.updateNumberOfIngredients}

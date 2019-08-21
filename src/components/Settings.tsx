@@ -13,8 +13,6 @@ import {
 import { DietPreference } from '../types/'
 
 interface Props {
-  updateIsCarnivore: Function,
-  isCarnivore: boolean,
   dietPreference: DietPreference,
   updateDietPreference: Function,
   updateNumberOfIngredients: Function,
@@ -22,17 +20,11 @@ interface Props {
 }
 
 export const Settings = ({
-  updateIsCarnivore,
-  isCarnivore,
   dietPreference,
   updateDietPreference,
   updateNumberOfIngredients,
   numOfOptionalIngredients,
 }: Props) => {
-  const handleCarnivoreSwitchClick = (e: React.FormEvent<HTMLInputElement>): void => {
-    e.preventDefault()
-    updateIsCarnivore()
-  }
 
   const handleDietPreferencesOnChange = (e: any) => {
     updateDietPreference(e.value)
@@ -47,14 +39,6 @@ export const Settings = ({
     <SettingsStyles className="settings">
       <StyledSlatOuter>
         <StyledSlatInner className="settings__inner">
-          <div>
-            <label>Carnivore: </label>
-            <input
-              className={`settings__carnivore-switch ${isCarnivore ? 'checked' : ''}`}
-              type="checkbox"
-              onClick={handleCarnivoreSwitchClick}
-            />
-          </div>
           <div className='settings__diet-dropdown'>
             <Dropdown
               options={DIET_PREFERENCES}
@@ -85,28 +69,6 @@ const SettingsStyles = styled.div`
   .settings {
     &__inner {
       margin: 0;
-    }
-    &__carnivore-switch {
-      position: relative;
-      -webkit-appearance: none;
-      outline: none;
-      width: 50px;
-      height: 30px;
-      background-color: ${({ theme }) => theme.white };
-      border: 1px solid ${({ theme }) => theme.lightGray };
-      border-radius: 50px;
-      box-shadow: inset -20px 0 0 0 ${({ theme }) => theme.white };
-      :after {
-        content: "";
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        background: transparent;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        box-shadow: 2px 4px 6px ${({ theme }) => theme.transparentOverlay };
-      }
     }
     &__diet-dropdown {
       border: 1px solid;
