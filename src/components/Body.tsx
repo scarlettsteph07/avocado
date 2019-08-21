@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import _ from 'lodash'
 
 import styled from '../styled'
 import { API_URL } from '../lib/appConstants'
@@ -29,13 +30,13 @@ interface State {
   payload: Payload,
 }
 
-class Body extends React.Component<Props, State> {
+export class Body extends React.Component<Props, State> {
   state: State = {
     isLoading: false,
     ingredients: [],
     payload: {
       dietPreference: 'carnivore',
-      numOfOptionalIngredients: 1,
+      numOfOptionalIngredients: 3,
     }
   }
 
@@ -59,7 +60,10 @@ class Body extends React.Component<Props, State> {
     )
     .then( response => {
       const { ingredients } = response.data
-      this.setState({ ingredients, isLoading: false })
+      this.setState({
+        ingredients: _.orderBy(ingredients, ['name', 'style'], ['asc']),
+        isLoading: false
+      })
     })
     .catch(error => {
       console.log(error)
@@ -79,17 +83,18 @@ class Body extends React.Component<Props, State> {
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
-  updateNumberOfIngredients = (numOfOptionalIngredients: number) => {
+  updateNumberOfIngredients = (numOfIngredients: number) => {
     this.setState(prevState => ({
       payload: {
         ...prevState.payload,
-        numOfOptionalIngredients,
+        numOfOptionalIngredients: numOfIngredients,
       }
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
   render() {
     const { isLoading, payload } = this.state
+    console.log('this.state: ', this.state);
     return (
     <BodyStyles className="body">
       <StyledSlatOuter className="body__outer">
@@ -99,7 +104,7 @@ class Body extends React.Component<Props, State> {
             dietPreference={payload.dietPreference}
             updateDietPreference={this.updateDietPreference}
             updateNumberOfIngredients={this.updateNumberOfIngredients}
-            numOfOptionalIngredients={payload.numOfOptionalIngredients}
+            numOfIngredients={payload.numOfOptionalIngredients}
           />
           { !isLoading &&
             <RandomizeButton
@@ -114,8 +119,6 @@ class Body extends React.Component<Props, State> {
     </BodyStyles>
   )}
 }
-
-export { Body }
 
 const BodyStyles = styled.div`
   min-height: 75vh;

@@ -16,14 +16,14 @@ interface Props {
   dietPreference: DietPreference,
   updateDietPreference: Function,
   updateNumberOfIngredients: Function,
-  numOfOptionalIngredients: number,
+  numOfIngredients: number,
 }
 
 export const Settings = ({
   dietPreference,
   updateDietPreference,
   updateNumberOfIngredients,
-  numOfOptionalIngredients,
+  numOfIngredients,
 }: Props) => {
 
   const handleDietPreferencesOnChange = (e: any) => {
@@ -31,8 +31,8 @@ export const Settings = ({
   }
 
   const handleIngredientsOnChange = (e: any) => {
-    const numOfOptionalIngredients = parseInt(e.target.value) || ''
-    updateNumberOfIngredients(numOfOptionalIngredients)
+    const numOfIngredients = parseInt(e.target.value) || ''
+    updateNumberOfIngredients(numOfIngredients)
   }
 
   return (
@@ -52,7 +52,7 @@ export const Settings = ({
             <input
               className="settings__ingredients-input"
               type="number"
-              value={numOfOptionalIngredients}
+              value={numOfIngredients}
               onChange={handleIngredientsOnChange}
             />
           </div>

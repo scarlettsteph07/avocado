@@ -3,7 +3,7 @@ export type Ingredient = {
   style: string,
 }
 
-export type DietPreference = "carnivore" | "vegan" | "vegetarian";
+export type DietPreference = "carnivore" | "vegan" | "vegetarian"
 
 export type Payload = {
   dietPreference: DietPreference,
