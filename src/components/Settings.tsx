@@ -72,6 +72,7 @@ const SettingsStyles = styled.div`
     }
     &__diet-dropdown {
       border: 1px solid;
+      text-transform: capitalize;
     }
     &__ingredients-input {
       width: 100px;

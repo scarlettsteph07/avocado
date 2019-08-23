@@ -94,7 +94,6 @@ export class Body extends React.Component<Props, State> {
 
   render() {
     const { isLoading, payload } = this.state
-    console.log('this.state: ', this.state);
     return (
     <BodyStyles className="body">
       <StyledSlatOuter className="body__outer">
