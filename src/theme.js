@@ -26,7 +26,7 @@ export let theme = {
     tablet: '768px',
   },
 
-  baseFont: '"Thisisatest", "Annie Use Your Telescope", cursive',
+  baseFont: '"Scarlett", "Annie Use Your Telescope", cursive',
   secondaryFont: '"Helvetica Neue", Helvetica, sans-serif',
 
   textPrimary:              '#202020',
