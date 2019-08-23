@@ -21,7 +21,11 @@ export const IngredientsList = ({ ingredients }: Props) => {
           {
             _.map(
               ingredients,
-              (ingredient, i) => <div key={i} className="ingredients__list__item">{_.startCase(ingredient.name)}</div>
+              (ingredient, i) => (
+                <div key={i} className="ingredients__list__item">
+                  {_.startCase(ingredient.style)}
+                </div>
+              )
             )
           }
         </StyledSlatInner>

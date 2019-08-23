@@ -1,5 +1,8 @@
 import React from 'react'
+import Dropdown from 'react-dropdown'
 import _ from 'lodash'
+
+import { DIET_PREFERENCES } from '../lib/appConstants'
 
 import styled from '../styled'
 import {
@@ -7,39 +10,41 @@ import {
   StyledSlatOuter,
 } from './styled/'
 
+import { DietPreference } from '../types/'
+
 interface Props {
-  updateIsCarnivore: Function,
-  isCarnivore: boolean,
+  dietPreference: DietPreference,
+  updateDietPreference: Function,
   updateNumberOfIngredients: Function,
-  numOfOptionalIngredients: number,
+  numOfIngredients: number,
 }
 
 export const Settings = ({
-  updateIsCarnivore,
-  isCarnivore,
+  dietPreference,
+  updateDietPreference,
   updateNumberOfIngredients,
-  numOfOptionalIngredients,
+  numOfIngredients,
 }: Props) => {
-  const handleCarnivoreSwitchClick = (e: React.FormEvent<HTMLInputElement>): void => {
-    e.preventDefault()
-    updateIsCarnivore()
+
+  const handleDietPreferencesOnChange = (e: any) => {
+    updateDietPreference(e.value)
   }
 
   const handleIngredientsOnChange = (e: any) => {
-    const numOfOptionalIngredients = parseInt(e.target.value) || ''
-    updateNumberOfIngredients(numOfOptionalIngredients)
+    const numOfIngredients = parseInt(e.target.value) || ''
+    updateNumberOfIngredients(numOfIngredients)
   }
 
   return (
     <SettingsStyles className="settings">
       <StyledSlatOuter>
         <StyledSlatInner className="settings__inner">
-          <div>
-            <label>Carnivore: </label>
-            <input
-              className={`settings__carnivore-switch ${isCarnivore ? 'checked' : ''}`}
-              type="checkbox"
-              onClick={handleCarnivoreSwitchClick}
+          <div className='settings__diet-dropdown'>
+            <Dropdown
+              options={DIET_PREFERENCES}
+              value={dietPreference}
+              placeholder='Select an option'
+              onChange={handleDietPreferencesOnChange}
             />
           </div>
           <div>
@@ -47,7 +52,7 @@ export const Settings = ({
             <input
               className="settings__ingredients-input"
               type="number"
-              value={numOfOptionalIngredients}
+              value={numOfIngredients}
               onChange={handleIngredientsOnChange}
             />
           </div>
@@ -65,27 +70,9 @@ const SettingsStyles = styled.div`
     &__inner {
       margin: 0;
     }
-    &__carnivore-switch {
-      position: relative;
-      -webkit-appearance: none;
-      outline: none;
-      width: 50px;
-      height: 30px;
-      background-color: ${({ theme }) => theme.white };
-      border: 1px solid ${({ theme }) => theme.lightGray };
-      border-radius: 50px;
-      box-shadow: inset -20px 0 0 0 ${({ theme }) => theme.white };
-      :after {
-        content: "";
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        background: transparent;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        box-shadow: 2px 4px 6px ${({ theme }) => theme.transparentOverlay };
-      }
+    &__diet-dropdown {
+      border: 1px solid;
+      text-transform: capitalize;
     }
     &__ingredients-input {
       width: 100px;

@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import _ from 'lodash'
 
 import styled from '../styled'
 import { API_URL } from '../lib/appConstants'
@@ -13,7 +14,11 @@ import {
   StyledSlatOuter,
 } from './styled/'
 
-import { Ingredient, Payload } from '../types/'
+import {
+  Ingredient,
+  Payload,
+  DietPreference
+} from '../types/'
 
 interface Props {
 
@@ -25,13 +30,13 @@ interface State {
   payload: Payload,
 }
 
-class Body extends React.Component<Props, State> {
-  state = {
+export class Body extends React.Component<Props, State> {
+  state: State = {
     isLoading: false,
     ingredients: [],
     payload: {
-      isCarnivore: false,
-      numOfOptionalIngredients: 1,
+      dietPreference: 'carnivore',
+      numOfOptionalIngredients: 3,
     }
   }
 
@@ -41,9 +46,10 @@ class Body extends React.Component<Props, State> {
   }
 
   setPayload = (): Payload => {
+    const { payload } = this.state
     return {
-      "isCarnivore": this.state.payload.isCarnivore,
-      "numOfOptionalIngredients": this.state.payload.numOfOptionalIngredients,
+      "dietPreference": payload.dietPreference,
+      "numOfOptionalIngredients": payload.numOfOptionalIngredients,
     }
   }
 
@@ -54,7 +60,10 @@ class Body extends React.Component<Props, State> {
     )
     .then( response => {
       const { ingredients } = response.data
-      this.setState({ ingredients, isLoading: false })
+      this.setState({
+        ingredients: _.orderBy(ingredients, ['name', 'style'], ['asc']),
+        isLoading: false
+      })
     })
     .catch(error => {
       console.log(error)
@@ -65,20 +74,20 @@ class Body extends React.Component<Props, State> {
     this.fetchIngredients(this.setPayload())
   }
 
-  updateIsCarnivore = () => {
+  updateDietPreference = (newDietPreference: DietPreference) => {
     this.setState(prevState => ({
       payload: {
         ...prevState.payload,
-        isCarnivore: !this.state.payload.isCarnivore,
+        dietPreference: newDietPreference,
       }
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
-  updateNumberOfIngredients = (numOfOptionalIngredients: number) => {
+  updateNumberOfIngredients = (numOfIngredients: number) => {
     this.setState(prevState => ({
       payload: {
         ...prevState.payload,
-        numOfOptionalIngredients,
+        numOfOptionalIngredients: numOfIngredients,
       }
     }), () => this.fetchIngredients(this.setPayload()))
   }
@@ -91,10 +100,10 @@ class Body extends React.Component<Props, State> {
         <StyledSlatInner className="body__inner">
           <IngredientsList ingredients={this.state.ingredients} />
           <Settings
-            updateIsCarnivore={this.updateIsCarnivore}
-            isCarnivore={payload.isCarnivore}
+            dietPreference={payload.dietPreference}
+            updateDietPreference={this.updateDietPreference}
             updateNumberOfIngredients={this.updateNumberOfIngredients}
-            numOfOptionalIngredients={payload.numOfOptionalIngredients}
+            numOfIngredients={payload.numOfOptionalIngredients}
           />
           { !isLoading &&
             <RandomizeButton
@@ -109,8 +118,6 @@ class Body extends React.Component<Props, State> {
     </BodyStyles>
   )}
 }
-
-export { Body }
 
 const BodyStyles = styled.div`
   min-height: 75vh;
