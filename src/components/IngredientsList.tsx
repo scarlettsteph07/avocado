@@ -34,7 +34,7 @@ export const IngredientsList = ({ ingredients, updateIgnoredIngredients }: Props
                   </span>
                   <StyledButton
                     className="ingredients__list-item__remove-button"
-                    onClick={() => updateIgnoredIngredients(ingredient)}
+                    onClick={() => updateIgnoredIngredients(ingredients, ingredient)}
                   >
                     Remove
                   </StyledButton>

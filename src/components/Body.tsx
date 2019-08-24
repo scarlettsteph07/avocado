@@ -38,6 +38,7 @@ export class Body extends React.Component<Props, State> {
       dietPreference: 'carnivore',
       numOfOptionalIngredients: 3,
       ignoredIngredients: [],
+      requestedIngredients: [],
     }
   }
 
@@ -52,6 +53,7 @@ export class Body extends React.Component<Props, State> {
       "dietPreference": payload.dietPreference,
       "numOfOptionalIngredients": payload.numOfOptionalIngredients,
       "ignoredIngredients": payload.ignoredIngredients,
+      "requestedIngredients": payload.requestedIngredients,
     }
   }
 
@@ -94,13 +96,17 @@ export class Body extends React.Component<Props, State> {
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
-  updateIgnoredIngredients = (anotherIgnoredIngredient: Ingredient) => {
+  updateIgnoredIngredients = (currentIngredients: Array<Ingredient>, ingredientToIgnore: Ingredient) => {
+    const requestedIngredients = _.remove(currentIngredients, (ingredient) => {
+      return JSON.stringify(ingredient) !== JSON.stringify(ingredientToIgnore)
+    })
     const ignoredIngredients = this.state.payload.ignoredIngredients
-    ignoredIngredients.push(anotherIgnoredIngredient)
+    ignoredIngredients.push(ingredientToIgnore)
     this.setState(prevState => ({
       payload: {
         ...prevState.payload,
         ignoredIngredients,
+        requestedIngredients,
       }
     }), () => this.fetchIngredients(this.setPayload()))
   }

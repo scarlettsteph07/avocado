@@ -10,4 +10,5 @@ export type Payload = {
   dietPreference: DietPreference,
   numOfOptionalIngredients: number,
   ignoredIngredients: Array<Ingredient>,
+  requestedIngredients: Array<Ingredient>,
 }
