@@ -13,13 +13,10 @@ import { Ingredient } from '../types/'
 
 interface Props {
   ingredients: Array<Ingredient>,
+  updateIgnoredIngredients: Function,
 }
 
-export const IngredientsList = ({ ingredients }: Props) => {
-  const handlerOnClick = () => {
-
-  }
-
+export const IngredientsList = ({ ingredients, updateIgnoredIngredients }: Props) => {
   return (
     <IngredientsListStyles className="ingredients">
       <StyledSlatOuter>
@@ -37,7 +34,7 @@ export const IngredientsList = ({ ingredients }: Props) => {
                   </span>
                   <StyledButton
                     className="ingredients__list-item__remove-button"
-                    onClick={handlerOnClick}
+                    onClick={() => updateIgnoredIngredients(ingredient)}
                   >
                     Remove
                   </StyledButton>

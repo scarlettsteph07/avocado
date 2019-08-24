@@ -37,6 +37,7 @@ export class Body extends React.Component<Props, State> {
     payload: {
       dietPreference: 'carnivore',
       numOfOptionalIngredients: 3,
+      ignoredIngredients: [],
     }
   }
 
@@ -50,6 +51,7 @@ export class Body extends React.Component<Props, State> {
     return {
       "dietPreference": payload.dietPreference,
       "numOfOptionalIngredients": payload.numOfOptionalIngredients,
+      "ignoredIngredients": payload.ignoredIngredients,
     }
   }
 
@@ -92,13 +94,27 @@ export class Body extends React.Component<Props, State> {
     }), () => this.fetchIngredients(this.setPayload()))
   }
 
+  updateIgnoredIngredients = (anotherIgnoredIngredient: Ingredient) => {
+    const ignoredIngredients = this.state.payload.ignoredIngredients
+    ignoredIngredients.push(anotherIgnoredIngredient)
+    this.setState(prevState => ({
+      payload: {
+        ...prevState.payload,
+        ignoredIngredients,
+      }
+    }), () => this.fetchIngredients(this.setPayload()))
+  }
+
   render() {
-    const { isLoading, payload } = this.state
+    const { isLoading, ingredients, payload } = this.state
     return (
     <BodyStyles className="body">
       <StyledSlatOuter className="body__outer">
         <StyledSlatInner className="body__inner">
-          <IngredientsList ingredients={this.state.ingredients} />
+          <IngredientsList
+            ingredients={ingredients}
+            updateIgnoredIngredients={this.updateIgnoredIngredients}
+          />
           <Settings
             dietPreference={payload.dietPreference}
             updateDietPreference={this.updateDietPreference}
