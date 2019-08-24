@@ -37,4 +37,5 @@ export let theme = {
   white:                    '#ffffff',
   emerald:                  '#4ed164',
   lightGray:                '#D9DADC',
+  red:                      '#FF0000',
 }
