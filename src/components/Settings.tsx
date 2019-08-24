@@ -39,6 +39,7 @@ export const Settings = ({
     <SettingsStyles className="settings">
       <StyledSlatOuter>
         <StyledSlatInner className="settings__inner">
+        <label>{_.upperCase("diet pref")}</label>
           <div className='settings__diet-dropdown'>
             <Dropdown
               options={DIET_PREFERENCES}
@@ -48,7 +49,7 @@ export const Settings = ({
             />
           </div>
           <div>
-            <label>{_.startCase("number of ingredients:")}</label>
+            <label>{_.upperCase("number of ingredients:")}</label>
             <input
               className="settings__ingredients-input"
               type="number"
