@@ -20,3 +20,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.mobileSelect .content .fixWidth {
+  width: 95% !important;
+}
+
+.mobileSelect .wheels .wheel .selectContainer li {
+  font-size: 25px !important;
+}

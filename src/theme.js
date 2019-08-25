@@ -36,6 +36,6 @@ export let theme = {
   black:                    '#000000',
   white:                    '#ffffff',
   emerald:                  '#4ed164',
-  lightGray:                '#D9DADC',
+  lightGray:                '#DCDCDC',
   red:                      '#FF0000',
 }

@@ -132,7 +132,7 @@ export class Body extends React.Component<Props, State> {
               className="randomize-button"
               onClick={(this.handleOnButtonClick)}
             >
-              Randomize!
+              Reset!
             </RandomizeButton>
             }
           </StyledSlatInner>

@@ -15,7 +15,7 @@ export const Footer = () => {
     <FooterStyles className='footer'>
       <StyledSlatOuter>
         <StyledSlatInner className='footer__inner'>
-          &copy; {currentTime.getFullYear()} scarlettsteph07. All Rights Reserved.
+          &copy; {currentTime.getFullYear()} Toast&Avocado. All Rights Reserved.
         </StyledSlatInner>
       </StyledSlatOuter>
     </FooterStyles>

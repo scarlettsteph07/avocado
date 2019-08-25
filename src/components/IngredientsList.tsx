@@ -70,11 +70,14 @@ const IngredientsListStyles = styled.div`
     }
     &__list-item {
       width: 100%;
-      height: 35px;
+      height: 25px;
       padding-bottom: 25px;
       display: flex;
       justify-content: space-between;
       position: relative;
+      @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
+        height: 60px;
+      }
       :after {
         border-bottom: 1px solid blue;
       }
