@@ -8,7 +8,7 @@ export let theme = {
   medium: {
     inner: '640px',
     start: '641px',
-    end: '1024px'
+    end: '1024px',
   },
   large: {
     before: '1139px',
@@ -19,7 +19,7 @@ export let theme = {
   xlarge: {
     outer: '1440px',
     inner: '1140px',
-    start: '1441px'
+    start: '1441px',
   },
   devices: {
     desktop: '926px',
@@ -29,13 +29,13 @@ export let theme = {
   baseFont: '"Scarlett", "Annie Use Your Telescope", cursive',
   secondaryFont: '"Helvetica Neue", Helvetica, sans-serif',
 
-  textPrimary:              '#202020',
-  transparent:              'transparent',
-  transparentOverlay:       'rgba(0,0,0,0.2)',
-  semiTransparentOverlay:   'rgba(0,0,0,0.05)',
-  black:                    '#000000',
-  white:                    '#ffffff',
-  emerald:                  '#4ed164',
-  lightGray:                '#DCDCDC',
-  red:                      '#FF0000',
+  textPrimary: '#202020',
+  transparent: 'transparent',
+  transparentOverlay: 'rgba(0,0,0,0.2)',
+  semiTransparentOverlay: 'rgba(0,0,0,0.05)',
+  black: '#000000',
+  white: '#ffffff',
+  emerald: '#4ed164',
+  lightGray: '#DCDCDC',
+  red: '#FF0000',
 }

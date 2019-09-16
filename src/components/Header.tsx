@@ -1,15 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 import styled from '../styled'
-import {
-  StyledSlatInner,
-  StyledSlatOuter,
-} from './styled/'
+import { StyledSlatInner, StyledSlatOuter } from './styled/'
 import { keyframes } from '@emotion/core'
 
 export interface Props {
-  mealTitle: string,
-  iconSource: string,
+  mealTitle: string
+  iconSource: string
 }
 
 export const Header = ({ mealTitle, iconSource }: Props) => {
@@ -17,10 +14,14 @@ export const Header = ({ mealTitle, iconSource }: Props) => {
     <HeaderStyles className="header">
       <StyledSlatOuter className="header__outer">
         <StyledSlatInner className="header__inner">
-          <img src={iconSource} className="header__icon"  alt="avocado"/>
+          <img
+            src={iconSource}
+            className="header__icon"
+            alt="avocado"
+          />
           <h1 className="header__title">{mealTitle}</h1>
-          </StyledSlatInner>
-        </StyledSlatOuter>
+        </StyledSlatInner>
+      </StyledSlatOuter>
     </HeaderStyles>
   )
 }

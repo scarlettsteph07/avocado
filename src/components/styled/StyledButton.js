@@ -28,7 +28,8 @@ export const StyledButton = styled.button`
   height: 35px;
   &:hover {
     color: ${({ theme }) => theme.textPrimary};
-    box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.textPrimary};
+    box-shadow: inset 0px 0px 0px 2px
+      ${({ theme }) => theme.textPrimary};
     background-color: ${({ theme }) => theme.transparent};
-  };
+  }
 `
