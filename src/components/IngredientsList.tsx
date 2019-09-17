@@ -16,7 +16,7 @@ interface Props {
   updateIgnoredIngredients: Function
 }
 
-export const IngredientsList = ({
+export const IngredientsList: React.FunctionComponent<Props> = ({
   ingredients,
   updateIgnoredIngredients,
 }: Props) => {

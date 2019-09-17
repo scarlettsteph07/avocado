@@ -10,9 +10,7 @@ interface Props {
   onChange: Function
 }
 
-interface State {}
-
-export class Picker extends React.Component<Props, State> {
+export class Picker extends React.Component<Props, {}> {
   componentDidMount = () => {
     const { dropdownTitle, wheelsData, onChange } = this.props
     const MobileSelect = require('mobile-select')
@@ -25,7 +23,7 @@ export class Picker extends React.Component<Props, State> {
       callback: (
         indexArr: Array<number>,
         selectedData: Array<string>,
-      ) => {
+      ): void => {
         onChange(_.head(selectedData))
       },
     })

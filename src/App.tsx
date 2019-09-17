@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Body, Footer, Header } from './components/'
 
-const App = () => {
+const App: React.FunctionComponent<{}> = () => {
   return (
     <div className="app">
       <Header

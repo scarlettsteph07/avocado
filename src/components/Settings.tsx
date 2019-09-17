@@ -16,17 +16,21 @@ interface Props {
   numOfIngredients: number
 }
 
-export const Settings = ({
+export const Settings: React.FunctionComponent<Props> = ({
   dietPreference,
   updateDietPreference,
   updateNumberOfIngredients,
   numOfIngredients,
 }: Props) => {
-  const handleDietPreferencesOnChange = (dietPreference: string) => {
+  const handleDietPreferencesOnChange = (
+    dietPreference: string,
+  ): void => {
     updateDietPreference(dietPreference)
   }
 
-  const handleIngredientsOnChange = (numberOfIngredients: string) => {
+  const handleIngredientsOnChange = (
+    numberOfIngredients: string,
+  ): void => {
     const numOfIngredients = parseInt(numberOfIngredients) || ''
     updateNumberOfIngredients(numOfIngredients)
   }

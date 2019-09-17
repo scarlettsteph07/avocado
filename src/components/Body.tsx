@@ -10,15 +10,13 @@ import { StyledSlatInner, StyledSlatOuter } from './styled/'
 
 import { Ingredient, Payload, DietPreference } from '../types/'
 
-interface Props {}
-
 interface State {
   isLoading: boolean
   ingredients: Array<Ingredient>
   payload: Payload
 }
 
-export class Body extends React.Component<Props, State> {
+export class Body extends React.Component<{}, State> {
   state: State = {
     isLoading: false,
     ingredients: [],
@@ -45,7 +43,7 @@ export class Body extends React.Component<Props, State> {
     }
   }
 
-  fetchIngredients = (data: Object) => {
+  fetchIngredients = (data: Payload): void => {
     axios
       .post(API_URL, data)
       .then((response) => {
@@ -64,11 +62,13 @@ export class Body extends React.Component<Props, State> {
       })
   }
 
-  handleOnButtonClick = () => {
+  handleOnButtonClick = (): void => {
     this.fetchIngredients(this.setPayload())
   }
 
-  updateDietPreference = (newDietPreference: DietPreference) => {
+  updateDietPreference = (
+    newDietPreference: DietPreference,
+  ): void => {
     this.setState(
       (prevState) => ({
         payload: {
@@ -80,7 +80,7 @@ export class Body extends React.Component<Props, State> {
     )
   }
 
-  updateNumberOfIngredients = (numOfIngredients: number) => {
+  updateNumberOfIngredients = (numOfIngredients: number): void => {
     this.setState(
       (prevState) => ({
         payload: {
@@ -95,7 +95,7 @@ export class Body extends React.Component<Props, State> {
   updateIgnoredIngredients = (
     currentIngredients: Array<Ingredient>,
     ingredientToIgnore: Ingredient,
-  ) => {
+  ): void => {
     const requestedIngredients = _.remove(
       currentIngredients,
       (ingredient) => {

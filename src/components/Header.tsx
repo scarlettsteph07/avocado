@@ -9,7 +9,10 @@ export interface Props {
   iconSource: string
 }
 
-export const Header = ({ mealTitle, iconSource }: Props) => {
+export const Header: React.FunctionComponent<Props> = ({
+  mealTitle,
+  iconSource,
+}: Props) => {
   return (
     <HeaderStyles className="header">
       <StyledSlatOuter className="header__outer">

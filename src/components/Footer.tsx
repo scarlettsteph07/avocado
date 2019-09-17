@@ -2,9 +2,8 @@ import React from 'react'
 
 import styled from '../styled'
 import { StyledSlatInner, StyledSlatOuter } from './styled/'
-interface Props {}
 
-export const Footer = () => {
+export const Footer: React.FunctionComponent<{}> = () => {
   const currentTime = new Date()
   return (
     <FooterStyles className="footer">
