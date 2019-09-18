@@ -4,33 +4,19 @@ import _ from 'lodash'
 
 import styled from '../styled'
 import { API_URL } from '../lib/appConstants'
-import {
-  IngredientsList,
-  Settings,
-} from './'
+import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
-import {
-  StyledSlatInner,
-  StyledSlatOuter,
-} from './styled/'
+import { StyledSlatInner, StyledSlatOuter } from './styled/'
 
-import {
-  Ingredient,
-  Payload,
-  DietPreference
-} from '../types/'
-
-interface Props {
-
-}
+import { Ingredient, Payload, DietPreference } from '../types/'
 
 interface State {
-  isLoading: boolean,
-  ingredients: Array<Ingredient>,
-  payload: Payload,
+  isLoading: boolean
+  ingredients: Array<Ingredient>
+  payload: Payload
 }
 
-export class Body extends React.Component<Props, State> {
+export class Body extends React.Component<{}, State> {
   state: State = {
     isLoading: false,
     ingredients: [],
@@ -39,7 +25,7 @@ export class Body extends React.Component<Props, State> {
       numOfOptionalIngredients: 3,
       ignoredIngredients: [],
       requestedIngredients: [],
-    }
+    },
   }
 
   componentDidMount = () => {
@@ -50,95 +36,120 @@ export class Body extends React.Component<Props, State> {
   setPayload = (): Payload => {
     const { payload } = this.state
     return {
-      "dietPreference": payload.dietPreference,
-      "numOfOptionalIngredients": payload.numOfOptionalIngredients,
-      "ignoredIngredients": payload.ignoredIngredients,
-      "requestedIngredients": payload.requestedIngredients,
+      dietPreference: payload.dietPreference,
+      numOfOptionalIngredients: payload.numOfOptionalIngredients,
+      ignoredIngredients: payload.ignoredIngredients,
+      requestedIngredients: payload.requestedIngredients,
     }
   }
 
-  fetchIngredients = (data: Object) => {
-    axios.post(
-      API_URL,
-      data,
-    )
-    .then( response => {
-      const { ingredients } = response.data
-      this.setState({
-        ingredients: _.orderBy(ingredients, ['name', 'style'], ['asc']),
-        isLoading: false
+  fetchIngredients = (data: Payload): void => {
+    axios
+      .post(API_URL, data)
+      .then((response) => {
+        const { ingredients } = response.data
+        this.setState({
+          ingredients: _.orderBy(
+            ingredients,
+            ['name', 'style'],
+            ['asc'],
+          ),
+          isLoading: false,
+        })
       })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  handleOnButtonClick = () => {
+  handleOnButtonClick = (): void => {
     this.fetchIngredients(this.setPayload())
   }
 
-  updateDietPreference = (newDietPreference: DietPreference) => {
-    this.setState(prevState => ({
-      payload: {
-        ...prevState.payload,
-        dietPreference: newDietPreference,
-      }
-    }), () => this.fetchIngredients(this.setPayload()))
+  updateDietPreference = (
+    newDietPreference: DietPreference,
+  ): void => {
+    this.setState(
+      (prevState) => ({
+        payload: {
+          ...prevState.payload,
+          dietPreference: newDietPreference,
+        },
+      }),
+      () => this.fetchIngredients(this.setPayload()),
+    )
   }
 
-  updateNumberOfIngredients = (numOfIngredients: number) => {
-    this.setState(prevState => ({
-      payload: {
-        ...prevState.payload,
-        numOfOptionalIngredients: numOfIngredients,
-      }
-    }), () => this.fetchIngredients(this.setPayload()))
+  updateNumberOfIngredients = (numOfIngredients: number): void => {
+    this.setState(
+      (prevState) => ({
+        payload: {
+          ...prevState.payload,
+          numOfOptionalIngredients: numOfIngredients,
+        },
+      }),
+      () => this.fetchIngredients(this.setPayload()),
+    )
   }
 
-  updateIgnoredIngredients = (currentIngredients: Array<Ingredient>, ingredientToIgnore: Ingredient) => {
-    const requestedIngredients = _.remove(currentIngredients, (ingredient) => {
-      return JSON.stringify(ingredient) !== JSON.stringify(ingredientToIgnore)
-    })
+  updateIgnoredIngredients = (
+    currentIngredients: Array<Ingredient>,
+    ingredientToIgnore: Ingredient,
+  ): void => {
+    const requestedIngredients = _.remove(
+      currentIngredients,
+      (ingredient) => {
+        return (
+          JSON.stringify(ingredient) !==
+          JSON.stringify(ingredientToIgnore)
+        )
+      },
+    )
     const ignoredIngredients = this.state.payload.ignoredIngredients
     ignoredIngredients.push(ingredientToIgnore)
-    this.setState(prevState => ({
-      payload: {
-        ...prevState.payload,
-        ignoredIngredients,
-        requestedIngredients,
-      }
-    }), () => this.fetchIngredients(this.setPayload()))
+    this.setState(
+      (prevState) => ({
+        payload: {
+          ...prevState.payload,
+          ignoredIngredients,
+          requestedIngredients,
+        },
+      }),
+      () => this.fetchIngredients(this.setPayload()),
+    )
   }
 
   render() {
     const { isLoading, ingredients, payload } = this.state
     return (
-    <BodyStyles className="body">
-      <StyledSlatOuter className="body__outer">
-        <StyledSlatInner className="body__inner">
-          <IngredientsList
-            ingredients={ingredients}
-            updateIgnoredIngredients={this.updateIgnoredIngredients}
-          />
-          <Settings
-            dietPreference={payload.dietPreference}
-            updateDietPreference={this.updateDietPreference}
-            updateNumberOfIngredients={this.updateNumberOfIngredients}
-            numOfIngredients={payload.numOfOptionalIngredients}
-          />
-          { !isLoading &&
-            <RandomizeButton
-              className="randomize-button"
-              onClick={(this.handleOnButtonClick)}
-            >
-              Reset!
-            </RandomizeButton>
-            }
+      <BodyStyles className="body">
+        <StyledSlatOuter className="body__outer">
+          <StyledSlatInner className="body__inner">
+            <IngredientsList
+              ingredients={ingredients}
+              updateIgnoredIngredients={this.updateIgnoredIngredients}
+            />
+            <Settings
+              dietPreference={payload.dietPreference}
+              updateDietPreference={this.updateDietPreference}
+              updateNumberOfIngredients={
+                this.updateNumberOfIngredients
+              }
+              numOfIngredients={payload.numOfOptionalIngredients}
+            />
+            {!isLoading && (
+              <RandomizeButton
+                className="randomize-button"
+                onClick={this.handleOnButtonClick}
+              >
+                Reset!
+              </RandomizeButton>
+            )}
           </StyledSlatInner>
         </StyledSlatOuter>
-    </BodyStyles>
-  )}
+      </BodyStyles>
+    )
+  }
 }
 
 const BodyStyles = styled.div`
@@ -146,7 +157,7 @@ const BodyStyles = styled.div`
   box-sizing: border-box;
   font-size: 25px;
   color: ${({ theme }) => theme.textPrimary};
-  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet}) {
     font-size: 70px;
   }
 
@@ -168,7 +179,7 @@ const RandomizeButton = styled(StyledButton)`
   width: 100%;
   height: auto;
   font-size: 25px;
-  @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
+  @media (min-width: ${({ theme }) => theme.devices.tablet}) {
     font-size: 50px;
   }
 `

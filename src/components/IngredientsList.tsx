@@ -12,36 +12,31 @@ import {
 import { Ingredient } from '../types/'
 
 interface Props {
-  ingredients: Array<Ingredient>,
-  updateIgnoredIngredients: Function,
+  ingredients: Array<Ingredient>
+  updateIgnoredIngredients: Function
 }
 
-export const IngredientsList = ({ ingredients, updateIgnoredIngredients }: Props) => {
+export const IngredientsList: React.FunctionComponent<Props> = ({
+  ingredients,
+  updateIgnoredIngredients,
+}: Props) => {
   return (
     <IngredientsListStyles className="ingredients">
       <StyledSlatOuter>
         <StyledSlatInner className="ingredients__inner">
-          {
-            _.map(
-              ingredients,
-              (ingredient, i) => (
-                <div
-                  key={i}
-                  className="ingredients__list-item"
-                >
-                  <span>
-                    {_.startCase(ingredient.style)}
-                  </span>
-                  <StyledButton
-                    className="ingredients__list-item__remove-button"
-                    onClick={() => updateIgnoredIngredients(ingredients, ingredient)}
-                  >
-                    Remove
-                  </StyledButton>
-                </div>
-              )
-            )
-          }
+          {_.map(ingredients, (ingredient, i) => (
+            <div key={i} className="ingredients__list-item">
+              <span>{_.startCase(ingredient.style)}</span>
+              <StyledButton
+                className="ingredients__list-item__remove-button"
+                onClick={() =>
+                  updateIgnoredIngredients(ingredients, ingredient)
+                }
+              >
+                Remove
+              </StyledButton>
+            </div>
+          ))}
         </StyledSlatInner>
       </StyledSlatOuter>
     </IngredientsListStyles>
@@ -75,7 +70,7 @@ const IngredientsListStyles = styled.div`
       display: flex;
       justify-content: space-between;
       position: relative;
-      @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
+      @media (min-width: ${({ theme }) => theme.devices.tablet}) {
         height: 60px;
       }
       :after {
@@ -84,7 +79,7 @@ const IngredientsListStyles = styled.div`
       :hover::after {
         border-bottom: 1px solid green;
       }
-      :hover button{
+      :hover button {
         display: inline;
         animation: ${slide} 0.7s forwards;
       }
@@ -101,15 +96,16 @@ const IngredientsListStyles = styled.div`
         position: absolute;
         right: -100px;
         display: none;
-        @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
+        @media (min-width: ${({ theme }) => theme.devices.tablet}) {
           font-size: 50px;
           max-height: 52px;
         }
         &:hover {
           color: ${({ theme }) => theme.red};
-          box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.red};
+          box-shadow: inset 0px 0px 0px 2px
+            ${({ theme }) => theme.red};
           background-color: ${({ theme }) => theme.white};
-        };
+        }
       }
     }
   }

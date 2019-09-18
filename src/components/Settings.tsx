@@ -5,32 +5,32 @@ import { DIET_PREFERENCES } from '../lib/appConstants'
 import { Picker } from './'
 
 import styled from '../styled'
-import {
-  StyledSlatInner,
-  StyledSlatOuter,
-} from './styled/'
+import { StyledSlatInner, StyledSlatOuter } from './styled/'
 
 import { DietPreference } from '../types/'
 
 interface Props {
-  dietPreference: DietPreference,
-  updateDietPreference: Function,
-  updateNumberOfIngredients: Function,
-  numOfIngredients: number,
+  dietPreference: DietPreference
+  updateDietPreference: Function
+  updateNumberOfIngredients: Function
+  numOfIngredients: number
 }
 
-export const Settings = ({
+export const Settings: React.FunctionComponent<Props> = ({
   dietPreference,
   updateDietPreference,
   updateNumberOfIngredients,
   numOfIngredients,
 }: Props) => {
-
-  const handleDietPreferencesOnChange = (dietPreference: string) => {
+  const handleDietPreferencesOnChange = (
+    dietPreference: string,
+  ): void => {
     updateDietPreference(dietPreference)
   }
 
-  const handleIngredientsOnChange = (numberOfIngredients: string) => {
+  const handleIngredientsOnChange = (
+    numberOfIngredients: string,
+  ): void => {
     const numOfIngredients = parseInt(numberOfIngredients) || ''
     updateNumberOfIngredients(numOfIngredients)
   }
@@ -40,7 +40,7 @@ export const Settings = ({
       <StyledSlatOuter>
         <StyledSlatInner className="settings__inner">
           <div>
-            <label>{_.upperCase("diet preference")}</label>
+            <label>{_.upperCase('diet preference')}</label>
             <Picker
               dropdownTitle="diet preference"
               wheelsData={DIET_PREFERENCES}
@@ -49,10 +49,10 @@ export const Settings = ({
             />
           </div>
           <div>
-            <label>{_.upperCase("number of ingredients:")}</label>
+            <label>{_.upperCase('number of ingredients:')}</label>
             <Picker
               dropdownTitle="number of ingredients"
-              wheelsData={['1','2','3','4','5','6']}
+              wheelsData={['1', '2', '3', '4', '5', '6']}
               value={numOfIngredients}
               onChange={handleIngredientsOnChange}
             />

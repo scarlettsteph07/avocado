@@ -1,21 +1,16 @@
 import React from 'react'
 
 import styled from '../styled'
-import {
-  StyledSlatInner,
-  StyledSlatOuter,
-} from './styled/'
-interface Props {
+import { StyledSlatInner, StyledSlatOuter } from './styled/'
 
-}
-
-export const Footer = () => {
+export const Footer: React.FunctionComponent<{}> = () => {
   const currentTime = new Date()
   return (
-    <FooterStyles className='footer'>
+    <FooterStyles className="footer">
       <StyledSlatOuter>
-        <StyledSlatInner className='footer__inner'>
-          &copy; {currentTime.getFullYear()} Toast&Avocado. All Rights Reserved.
+        <StyledSlatInner className="footer__inner">
+          &copy; {currentTime.getFullYear()} Toast&Avocado. All Rights
+          Reserved.
         </StyledSlatInner>
       </StyledSlatOuter>
     </FooterStyles>

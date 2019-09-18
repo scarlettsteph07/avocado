@@ -1,17 +1,16 @@
 import React from 'react'
 
-import {
-  Body,
-  Footer,
-  Header,
-} from './components/'
+import { Body, Footer, Header } from './components/'
 
-const App = () => {
+const App: React.FunctionComponent<{}> = () => {
   return (
     <div className="app">
-      <Header mealTitle="toast &amp; avocado" iconSource="/img/avocado.png"/>
-      <Body/>
-      <Footer/>
+      <Header
+        mealTitle="toast &amp; avocado"
+        iconSource="/img/avocado.png"
+      />
+      <Body />
+      <Footer />
     </div>
   )
 }
