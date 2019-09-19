@@ -44,7 +44,14 @@ export class Body extends React.Component<{}, State> {
   }
 
   fetchIngredients = (data: Payload): void => {
-    axios
+    const axiosInstance = axios.create({
+      baseURL: API_URL,
+      headers: {
+        'x-user-key': 'webapp-dev',
+      },
+    })
+
+    axiosInstance
       .post(API_URL, data)
       .then((response) => {
         const { ingredients } = response.data
