@@ -9,10 +9,7 @@ describe('Header component', () => {
   test('should match snapshot', () => {
     const component = renderer.create(
       <ThemeProvider theme={theme}>
-        <Header
-          mealTitle="toast &amp; avocado"
-          iconSource="/img/avocado.png"
-        />
+        <Header />
       </ThemeProvider>,
     )
     const tree = component.toJSON()

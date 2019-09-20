@@ -18,7 +18,7 @@ exports[`Header component should match snapshot 1`] = `
       <h1
         className="header__title"
       >
-        toast & avocado
+        Toast & Avocado
       </h1>
     </div>
   </section>
