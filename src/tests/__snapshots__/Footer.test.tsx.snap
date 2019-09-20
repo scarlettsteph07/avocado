@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component should match snapshot 1`] = `
+<footer
+  className="footer css-55baki"
+>
+  <section
+    className="css-gvh4h9"
+  >
+    <div
+      className="footer__inner css-12rf414"
+    >
+      © 
+      2019
+       
+      Toast & Avocado
+      . All Rights Reserved.
+    </div>
+  </section>
+</footer>
+`;

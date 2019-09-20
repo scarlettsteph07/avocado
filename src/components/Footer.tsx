@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styled from '../styled'
+import { APP_TITLE } from '../lib/appConstants'
 import { StyledSlatInner, StyledSlatOuter } from './styled/'
 
 export const Footer: React.FunctionComponent<{}> = () => {
@@ -9,7 +10,7 @@ export const Footer: React.FunctionComponent<{}> = () => {
     <FooterStyles className="footer">
       <StyledSlatOuter>
         <StyledSlatInner className="footer__inner">
-          &copy; {currentTime.getFullYear()} Toast&Avocado. All Rights
+          &copy; {currentTime.getFullYear()} {APP_TITLE}. All Rights
           Reserved.
         </StyledSlatInner>
       </StyledSlatOuter>

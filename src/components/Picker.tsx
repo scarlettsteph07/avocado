@@ -11,7 +11,7 @@ interface Props {
 }
 
 export class Picker extends React.Component<Props, {}> {
-  componentDidMount = () => {
+  componentDidMount = (): void => {
     const { dropdownTitle, wheelsData, onChange } = this.props
     const MobileSelect = require('mobile-select')
     const picker = new MobileSelect({
@@ -30,7 +30,7 @@ export class Picker extends React.Component<Props, {}> {
     return picker
   }
 
-  render() {
+  render(): React.ReactNode {
     const { dropdownTitle, value } = this.props
     return (
       <PickerStyles id={_.kebabCase(dropdownTitle)}>

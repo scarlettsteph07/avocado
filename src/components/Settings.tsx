@@ -11,16 +11,16 @@ import { DietPreference } from '../types/'
 
 interface Props {
   dietPreference: DietPreference
+  numOfIngredients: number
   updateDietPreference: Function
   updateNumberOfIngredients: Function
-  numOfIngredients: number
 }
 
 export const Settings: React.FunctionComponent<Props> = ({
   dietPreference,
+  numOfIngredients,
   updateDietPreference,
   updateNumberOfIngredients,
-  numOfIngredients,
 }: Props) => {
   const handleDietPreferencesOnChange = (
     dietPreference: string,
@@ -43,18 +43,18 @@ export const Settings: React.FunctionComponent<Props> = ({
             <label>{_.upperCase('diet preference')}</label>
             <Picker
               dropdownTitle="diet preference"
-              wheelsData={DIET_PREFERENCES}
-              value={dietPreference}
               onChange={handleDietPreferencesOnChange}
+              value={dietPreference}
+              wheelsData={DIET_PREFERENCES}
             />
           </div>
           <div>
             <label>{_.upperCase('number of ingredients:')}</label>
             <Picker
               dropdownTitle="number of ingredients"
-              wheelsData={['1', '2', '3', '4', '5', '6']}
-              value={numOfIngredients}
               onChange={handleIngredientsOnChange}
+              value={numOfIngredients}
+              wheelsData={['1', '2', '3', '4', '5', '6']}
             />
           </div>
         </StyledSlatInner>
