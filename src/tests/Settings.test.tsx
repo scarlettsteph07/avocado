@@ -12,8 +12,8 @@ describe('Settings component', () => {
         <Settings
           dietPreference="carnivore"
           numOfIngredients={3}
-          updateDietPreference={() => {}}
-          updateNumberOfIngredients={() => {}}
+          updateDietPreference={jest.fn()}
+          updateNumberOfIngredients={jest.fn()}
         />
       </ThemeProvider>,
     )

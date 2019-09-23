@@ -12,7 +12,7 @@ describe('Picker component', () => {
       <ThemeProvider theme={theme}>
         <Picker
           dropdownTitle="diet preference"
-          onChange={() => {}}
+          onChange={jest.fn()}
           value="carnivore"
           wheelsData={DIET_PREFERENCES}
         />

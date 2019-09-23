@@ -27,7 +27,7 @@ describe('IngredientsList component', () => {
   const ingredientsList = shallow(
     <IngredientsList
       ingredients={ingredients}
-      updateIgnoredIngredients={() => {}}
+      updateIgnoredIngredients={jest.fn()}
     />,
   )
 
