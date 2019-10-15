@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Picker component should match snapshot 1`] = `
+<div
+  className="css-vhwtt1"
+  id="diet-preference"
+>
+  carnivore
+</div>
+`;

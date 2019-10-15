@@ -1,28 +1,21 @@
 import React from 'react'
 
 import styled from '../styled'
+import { APP_TITLE } from '../lib/appConstants'
 import { StyledSlatInner, StyledSlatOuter } from './styled/'
 import { keyframes } from '@emotion/core'
 
-export interface Props {
-  mealTitle: string
-  iconSource: string
-}
-
-export const Header: React.FunctionComponent<Props> = ({
-  mealTitle,
-  iconSource,
-}: Props) => {
+export const Header: React.FunctionComponent = () => {
   return (
     <HeaderStyles className="header">
       <StyledSlatOuter className="header__outer">
         <StyledSlatInner className="header__inner">
           <img
-            src={iconSource}
+            src="/img/avocado.png"
             className="header__icon"
             alt="avocado"
           />
-          <h1 className="header__title">{mealTitle}</h1>
+          <h1 className="header__title">{APP_TITLE}</h1>
         </StyledSlatInner>
       </StyledSlatOuter>
     </HeaderStyles>

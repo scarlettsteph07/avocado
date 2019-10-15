@@ -1,4 +1,5 @@
-export const API_URL =
-  'https://99iva9ikm2.execute-api.us-east-1.amazonaws.com/stage/ingredients'
+export const API_URL = 'https://api.toastandavocado.xyz/v1/recipes'
+
+export const APP_TITLE = 'Toast & Avocado'
 
 export const DIET_PREFERENCES = ['carnivore', 'vegan', 'vegetarian']

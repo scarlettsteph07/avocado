@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings component should match snapshot 1`] = `
+<div
+  className="settings css-uzvvh5"
+>
+  <section
+    className="css-gvh4h9"
+  >
+    <div
+      className="settings__inner css-12rf414"
+    >
+      <div>
+        <label>
+          DIET PREFERENCE
+        </label>
+        <div
+          className="css-vhwtt1"
+          id="diet-preference"
+        >
+          carnivore
+        </div>
+      </div>
+      <div>
+        <label>
+          NUMBER OF INGREDIENTS
+        </label>
+        <div
+          className="css-vhwtt1"
+          id="number-of-ingredients"
+        >
+          3
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

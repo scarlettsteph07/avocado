@@ -17,6 +17,7 @@ interface State {
 }
 
 export class Body extends React.Component<{}, State> {
+  _isMounted = false
   state: State = {
     isLoading: false,
     ingredients: [],
@@ -28,9 +29,14 @@ export class Body extends React.Component<{}, State> {
     },
   }
 
-  componentDidMount = () => {
+  componentDidMount = (): void => {
+    this._isMounted = true
     this.setState({ isLoading: true })
     this.fetchIngredients(this.setPayload())
+  }
+
+  componentWillUnmount = (): void => {
+    this._isMounted = false
   }
 
   setPayload = (): Payload => {
@@ -44,18 +50,27 @@ export class Body extends React.Component<{}, State> {
   }
 
   fetchIngredients = (data: Payload): void => {
-    axios
+    const axiosInstance = axios.create({
+      baseURL: API_URL,
+      headers: {
+        'x-user-key': 'webapp-dev',
+      },
+    })
+
+    axiosInstance
       .post(API_URL, data)
       .then((response) => {
-        const { ingredients } = response.data
-        this.setState({
-          ingredients: _.orderBy(
-            ingredients,
-            ['name', 'style'],
-            ['asc'],
-          ),
-          isLoading: false,
-        })
+        if (this._isMounted) {
+          const { ingredients } = response.data
+          this.setState({
+            ingredients: _.orderBy(
+              ingredients,
+              ['name', 'style'],
+              ['asc'],
+            ),
+            isLoading: false,
+          })
+        }
       })
       .catch((error) => {
         console.log(error)
@@ -119,7 +134,7 @@ export class Body extends React.Component<{}, State> {
     )
   }
 
-  render() {
+  render(): React.ReactNode {
     const { isLoading, ingredients, payload } = this.state
     return (
       <BodyStyles className="body">

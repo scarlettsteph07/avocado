@@ -1,4 +1,4 @@
-export let theme = {
+export const theme = {
   small: {
     outer: '320px',
     inner: '320px',

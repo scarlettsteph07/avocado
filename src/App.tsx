@@ -5,10 +5,7 @@ import { Body, Footer, Header } from './components/'
 const App: React.FunctionComponent<{}> = () => {
   return (
     <div className="app">
-      <Header
-        mealTitle="toast &amp; avocado"
-        iconSource="/img/avocado.png"
-      />
+      <Header />
       <Body />
       <Footer />
     </div>

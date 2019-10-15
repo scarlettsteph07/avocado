@@ -5,7 +5,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.15",
     "@emotion/styled": "^10.0.15",
-    "@types/jest": "^24.0.16",
+    "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.136",
     "@types/node": "^12.6.9",
     "@types/react": "^16.9.2",
@@ -13,7 +13,7 @@
     "axios": "^0.19.0",
     "emotion-theming": "^10.0.14",
     "mobile-select": "^1.1.2",
-    "react": "^16.8.6",
+    "react": "^16.9.0",
     "react-dom": "^16.8.6",
     "react-dropdown": "^1.6.4",
     "react-router-dom": "^5.0.1",
@@ -40,13 +40,20 @@
     ]
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/react-test-renderer": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
-    "prettier": "^1.18.2"
+    "jest-emotion": "^10.0.17",
+    "prettier": "^1.18.2",
+    "react-test-renderer": "^16.9.0"
   }
 }

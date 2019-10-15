@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should match snapshot 1`] = `
+<header
+  className="header css-m90vym"
+>
+  <section
+    className="header__outer css-gvh4h9"
+  >
+    <div
+      className="header__inner css-12rf414"
+    >
+      <img
+        alt="avocado"
+        className="header__icon"
+        src="/img/avocado.png"
+      />
+      <h1
+        className="header__title"
+      >
+        Toast & Avocado
+      </h1>
+    </div>
+  </section>
+</header>
+`;
