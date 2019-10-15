@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+.emotion-0 {
+  background-image: none;
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 15px 14px;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: black;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.21;
+  -webkit-letter-spacing: 2.8px;
+  -moz-letter-spacing: 2.8px;
+  -ms-letter-spacing: 2.8px;
+  letter-spacing: 2.8px;
+  text-align: center;
+  -webkit-letter-spacing: 1.5px;
+  -moz-letter-spacing: 1.5px;
+  -ms-letter-spacing: 1.5px;
+  letter-spacing: 1.5px;
+  padding: 10px 15px 10px 15px;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin: 0 auto 0 0;
+  height: 35px;
+}
+
+.emotion-0:hover {
+  box-shadow: inset 0px 0px 0px 2px;
+}
+
+<button
+  className="emotion-0"
+>
+  Reset!
+</button>
+`;
+
+exports[`StyledButton Button renders correctly 1`] = `
+.emotion-0 {
+  background-image: none;
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  background-size: 15px 14px;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: black;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.21;
+  -webkit-letter-spacing: 2.8px;
+  -moz-letter-spacing: 2.8px;
+  -ms-letter-spacing: 2.8px;
+  letter-spacing: 2.8px;
+  text-align: center;
+  -webkit-letter-spacing: 1.5px;
+  -moz-letter-spacing: 1.5px;
+  -ms-letter-spacing: 1.5px;
+  letter-spacing: 1.5px;
+  padding: 10px 15px 10px 15px;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin: 0 auto 0 0;
+  height: 35px;
+}
+
+.emotion-0:hover {
+  box-shadow: inset 0px 0px 0px 2px;
+}
+
+<button
+  className="emotion-0"
+>
+  Reset!
+</button>
+`;
