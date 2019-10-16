@@ -1,12 +1,16 @@
 import React from 'react'
 
-import { Footer, Header, Recipe } from './components/'
+import { Body, Footer, Header } from './components/'
 
-const App: React.FunctionComponent<{}> = () => {
+type Props = {
+  children: React.FunctionComponent
+}
+
+const App: React.FunctionComponent<Props> = ({ children }: Props) => {
   return (
     <div className="app">
       <Header />
-      <Recipe />
+      <Body>{children}</Body>
       <Footer />
     </div>
   )
