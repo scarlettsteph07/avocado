@@ -1,12 +1,27 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom'
 
 import App from './App'
+import { Recipe } from './components/'
 
 export const AppRouter = () => {
   return (
     <Router>
-      <Route exact path="/" component={App} />
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <App {...props}>
+              <Recipe />
+            </App>
+          )}
+        />
+      </Switch>
     </Router>
   )
 }

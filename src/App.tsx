@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Body, Footer, Header } from './components/'
+import { Footer, Header, Recipe } from './components/'
 
 const App: React.FunctionComponent<{}> = () => {
   return (
     <div className="app">
       <Header />
-      <Body />
+      <Recipe />
       <Footer />
     </div>
   )

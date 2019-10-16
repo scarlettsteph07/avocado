@@ -2,12 +2,12 @@ import React from 'react'
 import enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import { Body } from '../components/'
+import { Recipe } from '../components/'
 
 enzyme.configure({ adapter: new Adapter() })
 
-describe('Body component', () => {
-  const body = shallow(<Body />)
+describe('Recipe component', () => {
+  const body = shallow(<Recipe />)
 
   test('should match text', () => {
     expect(body.text()).toEqual('<IngredientsList /><Settings />')

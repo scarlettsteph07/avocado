@@ -16,7 +16,7 @@ interface State {
   payload: Payload
 }
 
-export class Body extends React.Component<{}, State> {
+export class Recipe extends React.Component<{}, State> {
   _isMounted = false
   state: State = {
     isLoading: false,
