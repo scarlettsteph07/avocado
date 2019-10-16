@@ -6,7 +6,6 @@ import styled from '../styled'
 import { API_URL } from '../lib/appConstants'
 import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
-import { StyledSlatInner, StyledSlatOuter } from './styled/'
 
 import { Ingredient, Payload, DietPreference } from '../types/'
 
@@ -137,56 +136,32 @@ export class Recipe extends React.Component<{}, State> {
   render(): React.ReactNode {
     const { isLoading, ingredients, payload } = this.state
     return (
-      <BodyStyles className="body">
-        <StyledSlatOuter className="body__outer">
-          <StyledSlatInner className="body__inner">
-            <IngredientsList
-              ingredients={ingredients}
-              updateIgnoredIngredients={this.updateIgnoredIngredients}
-            />
-            <Settings
-              dietPreference={payload.dietPreference}
-              updateDietPreference={this.updateDietPreference}
-              updateNumberOfIngredients={
-                this.updateNumberOfIngredients
-              }
-              numOfIngredients={payload.numOfOptionalIngredients}
-            />
-            {!isLoading && (
-              <RandomizeButton
-                className="randomize-button"
-                onClick={this.handleOnButtonClick}
-              >
-                Reset!
-              </RandomizeButton>
-            )}
-          </StyledSlatInner>
-        </StyledSlatOuter>
-      </BodyStyles>
+      <RecipeStyles className="recipe">
+        <IngredientsList
+          ingredients={ingredients}
+          updateIgnoredIngredients={this.updateIgnoredIngredients}
+        />
+        <Settings
+          dietPreference={payload.dietPreference}
+          updateDietPreference={this.updateDietPreference}
+          updateNumberOfIngredients={this.updateNumberOfIngredients}
+          numOfIngredients={payload.numOfOptionalIngredients}
+        />
+        {!isLoading && (
+          <RandomizeButton
+            className="randomize-button"
+            onClick={this.handleOnButtonClick}
+          >
+            Reset!
+          </RandomizeButton>
+        )}
+      </RecipeStyles>
     )
   }
 }
 
-const BodyStyles = styled.div`
-  min-height: 75vh;
-  box-sizing: border-box;
-  font-size: 25px;
-  color: ${({ theme }) => theme.textPrimary};
-  @media (min-width: ${({ theme }) => theme.devices.tablet}) {
-    font-size: 70px;
-  }
-
-  .body {
-    &__outer {
-      min-height: 75vh;
-    }
-    &__inner {
-      min-height: 75vh;
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
+const RecipeStyles = styled.div`
+  .recipe {
   }
 `
 
