@@ -3,7 +3,7 @@ import axios from 'axios'
 import _ from 'lodash'
 
 import styled from '../styled'
-import { API_URL } from '../lib/appConstants'
+import { API_DEV_USER, API_URL } from '../lib/appConstants'
 import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
 
@@ -52,7 +52,7 @@ export class Recipe extends React.Component<{}, State> {
     const axiosInstance = axios.create({
       baseURL: API_URL,
       headers: {
-        'x-user-key': 'webapp-dev',
+        'x-user-key': API_DEV_USER,
       },
     })
 

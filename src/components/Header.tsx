@@ -10,12 +10,14 @@ export const Header: React.FunctionComponent = () => {
     <HeaderStyles className="header">
       <StyledSlatOuter className="header__outer">
         <StyledSlatInner className="header__inner">
-          <img
-            src="/img/avocado.png"
-            className="header__icon"
-            alt="avocado"
-          />
-          <h1 className="header__title">{APP_TITLE}</h1>
+          <a className="header__link" href="/">
+            <img
+              src="/img/avocado.png"
+              className="header__icon"
+              alt="avocado"
+            />
+            <h1 className="header__title">{APP_TITLE}</h1>
+          </a>
         </StyledSlatInner>
       </StyledSlatOuter>
     </HeaderStyles>
@@ -34,7 +36,9 @@ const HeaderStyles = styled.header`
   font-size: calc(10px + 2vmin);
   color: ${({ theme }) => theme.textPrimary};
   .header {
-    &__inner {
+    &__link {
+      color: inherit;
+      text-decoration: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
