@@ -3,7 +3,12 @@ import axios from 'axios'
 import _ from 'lodash'
 
 import styled from '../styled'
-import { API, API_DEV_USER } from '../lib/appConstants'
+import {
+  API,
+  API_DEV_USER,
+  APPLICATION_PATHS as PATHS,
+} from '../lib/appConstants'
+import { SubHeader } from './'
 
 import { Ingredient } from '../types'
 
@@ -53,17 +58,20 @@ export class Grid extends React.Component<{}, State> {
     !isLoading && console.log('ingredients: ', ingredients)
     return (
       <GridStyles className="grid">
-        <div className="grid__header">
-          <h1 className="grid__header__title">All Ingredients</h1>
-          <button className="grid__header__add-button" />
-        </div>
+        <SubHeader titleText="All Ingredients" />
         <div className="grid__container">
           {!isLoading &&
             ingredients.map((ingredient, index) => {
               return (
-                <div className="grid__item" key={index}>
-                  {ingredient.name}
-                </div>
+                <a
+                  className="grid__item"
+                  key={index}
+                  href={`/${PATHS.INGREDIENTS}/${_.kebabCase(
+                    ingredient.name,
+                  )}`}
+                >
+                  <div>{ingredient.name}</div>
+                </a>
               )
             })}
         </div>
@@ -76,29 +84,6 @@ const GridStyles = styled.div`
   display: flex;
   flex-flow: column;
   .grid {
-    &__header {
-      display: flex;
-      flex-flow: row;
-      align-items: center;
-      justify-content: space-between;
-      &__title {
-        margin: 31.25px auto;
-      }
-      &__add-button {
-        width: 25px;
-        height: 25px;
-        margin: 31.25px 0;
-        background-image: url(/svg/icon--plus.svg);
-        background-size: 25px;
-        border: none;
-        cursor: pointer;
-        @media (min-width: ${({ theme }) => theme.devices.tablet}) {
-          width: 50px;
-          height: 50px;
-          background-size: 50px;
-        }
-      }
-    }
     &__container {
       display: flex;
       flex-flow: row;
@@ -108,12 +93,14 @@ const GridStyles = styled.div`
     &__item {
       width: 25%;
       height: 100px;
+      text-align: center;
       border: 1px solid ${({ theme }) => theme.textPrimary};
+      box-sizing: border-box;
+      text-decoration: none;
+      color: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      box-sizing: border-box;
       &:hover {
         text-decoration: underline;
         background-color: ${({ theme }) => theme.textPrimary};
