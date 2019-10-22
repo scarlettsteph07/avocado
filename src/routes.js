@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 import App from './App'
-import { Grid, Recipe } from './components/'
+import { Grid, IngredientPage, Recipe } from './components/'
 import { APPLICATION_PATHS as PATHS } from './lib/appConstants'
 
 export const AppRouter = () => {
@@ -28,6 +28,15 @@ export const AppRouter = () => {
           render={(props) => (
             <App {...props}>
               <Grid {...props} />
+            </App>
+          )}
+        />
+        <Route
+          exact
+          path={`/${PATHS.INGREDIENTS}/:ingredientId`}
+          render={(props) => (
+            <App {...props}>
+              <IngredientPage {...props} />
             </App>
           )}
         />
