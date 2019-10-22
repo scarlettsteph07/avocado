@@ -1,7 +1,10 @@
 import React from 'react'
 
 import styled from '../styled'
-import { APP_TITLE } from '../lib/appConstants'
+import {
+  APP_TITLE,
+  APPLICATION_PATHS as PATHS,
+} from '../lib/appConstants'
 import { StyledSlatInner, StyledSlatOuter } from './styled/'
 import { keyframes } from '@emotion/core'
 
@@ -17,6 +20,9 @@ export const Header: React.FunctionComponent = () => {
               alt="avocado"
             />
             <h1 className="header__title">{APP_TITLE}</h1>
+          </a>
+          <a className="header__settings" href={PATHS.INGREDIENTS}>
+            <img src="/svg/icon--gear.svg" alt="settings" />
           </a>
         </StyledSlatInner>
       </StyledSlatOuter>
@@ -36,13 +42,20 @@ const HeaderStyles = styled.header`
   font-size: calc(10px + 2vmin);
   color: ${({ theme }) => theme.textPrimary};
   .header {
+    &__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     &__link {
+      width: 75%;
       color: inherit;
       text-decoration: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
       @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
+        width: 80%;
         flex-direction: row;
         justify-content: space-between;
       }
@@ -59,15 +72,21 @@ const HeaderStyles = styled.header`
       }
     }
     &__title {
-      letter-spacing: 0.4em;
       margin: 0px !important;
       text-transform: uppercase;
       @media (min-width: ${({ theme }) => theme.devices.tablet} ) {
-        letter-spacing: 0.2em;
         font-size: 65px;
       }
       @media (min-width: ${({ theme }) => theme.devices.desktop} ) {
         font-size: 100px;
+      }
+    }
+    &__settings {
+      width: 25px;
+      height: 25px;
+      @media (min-width: ${({ theme }) => theme.devices.tablet}) {
+        width: 70px;
+        height: 70px;
       }
     }
   }
