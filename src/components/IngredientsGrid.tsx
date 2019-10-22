@@ -17,7 +17,7 @@ interface State {
   ingredients: Array<Ingredient>
 }
 
-export class Grid extends React.Component<{}, State> {
+export class IngredientsGrid extends React.Component<{}, State> {
   state: State = {
     isLoading: false,
     ingredients: [],
@@ -55,16 +55,15 @@ export class Grid extends React.Component<{}, State> {
 
   render(): React.ReactNode {
     const { isLoading, ingredients } = this.state
-    !isLoading && console.log('ingredients: ', ingredients)
     return (
-      <GridStyles className="grid">
+      <IngredientsGridStyles className="ingredients-grid">
         <SubHeader titleText="All Ingredients" />
-        <div className="grid__container">
+        <div className="ingredients-grid__container">
           {!isLoading &&
             ingredients.map((ingredient, index) => {
               return (
                 <a
-                  className="grid__item"
+                  className="ingredients-grid__item"
                   key={index}
                   href={`/${PATHS.INGREDIENTS}/${_.kebabCase(
                     ingredient.name,
@@ -75,15 +74,15 @@ export class Grid extends React.Component<{}, State> {
               )
             })}
         </div>
-      </GridStyles>
+      </IngredientsGridStyles>
     )
   }
 }
 
-const GridStyles = styled.div`
+const IngredientsGridStyles = styled.div`
   display: flex;
   flex-flow: column;
-  .grid {
+  .ingredients-grid {
     &__container {
       display: flex;
       flex-flow: row;
@@ -102,7 +101,6 @@ const GridStyles = styled.div`
       align-items: center;
       justify-content: center;
       &:hover {
-        text-decoration: underline;
         background-color: ${({ theme }) => theme.textPrimary};
         color: ${({ theme }) => theme.white};
       }

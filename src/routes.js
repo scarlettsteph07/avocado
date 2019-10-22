@@ -6,7 +6,11 @@ import {
 } from 'react-router-dom'
 
 import App from './App'
-import { Grid, IngredientPage, Recipe } from './components/'
+import {
+  IngredientsGrid,
+  IngredientPage,
+  Recipe,
+} from './components/'
 import { APPLICATION_PATHS as PATHS } from './lib/appConstants'
 
 export const AppRouter = () => {
@@ -27,7 +31,7 @@ export const AppRouter = () => {
           path={`/${PATHS.INGREDIENTS}`}
           render={(props) => (
             <App {...props}>
-              <Grid {...props} />
+              <IngredientsGrid {...props} />
             </App>
           )}
         />
