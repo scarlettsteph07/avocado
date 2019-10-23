@@ -6,6 +6,7 @@ import axios from 'axios'
 import styled from '../styled'
 import { SubHeader } from './SubHeader'
 import { API, API_DEV_USER } from '../lib/appConstants'
+import { StyledIconButton } from './styled/StyledIconButton'
 
 type Props = {}
 
@@ -63,6 +64,10 @@ export const IngredientPage: React.FunctionComponent<Props> = () => {
             return (
               <div className="ingredient__styles__item" key={index}>
                 {style}
+                <span className="ingredient__icons">
+                  <StyledIconButton className="ingredient__icons__item ingredient__icons__item--edit" />
+                  <StyledIconButton className="ingredient__icons__item ingredient__icons__item--remove" />
+                </span>
               </div>
             )
           })}
@@ -86,6 +91,18 @@ const IngredientPageStyles = styled.div`
           display: flex;
           display: flex;
           justify-content: space-around;
+        }
+      }
+    }
+    &__icons {
+      width: 120px;
+      display: none;
+      &__item {
+        &--edit {
+          background-image: url(/svg/icon--pencil.svg);
+        }
+        &--remove {
+          background-image: url(/svg/icon--minus.svg);
         }
       }
     }
