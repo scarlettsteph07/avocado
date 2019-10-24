@@ -141,12 +141,14 @@ export class Recipe extends React.Component<{}, State> {
           ingredients={ingredients}
           updateIgnoredIngredients={this.updateIgnoredIngredients}
         />
-        <Settings
-          dietPreference={payload.dietPreference}
-          updateDietPreference={this.updateDietPreference}
-          updateNumberOfIngredients={this.updateNumberOfIngredients}
-          numOfIngredients={payload.numOfOptionalIngredients}
-        />
+        {!isLoading && (
+          <Settings
+            dietPreference={payload.dietPreference}
+            updateDietPreference={this.updateDietPreference}
+            updateNumberOfIngredients={this.updateNumberOfIngredients}
+            numOfIngredients={payload.numOfOptionalIngredients}
+          />
+        )}
         {!isLoading && (
           <RandomizeButton
             className="randomize-button"
