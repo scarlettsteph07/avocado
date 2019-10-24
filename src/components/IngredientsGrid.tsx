@@ -8,7 +8,7 @@ import {
   API_DEV_USER,
   APPLICATION_PATHS as PATHS,
 } from '../lib/appConstants'
-import { SubHeader } from './'
+import { CustomModal } from './'
 
 import { Ingredient } from '../types'
 
@@ -57,7 +57,12 @@ export class IngredientsGrid extends React.Component<{}, State> {
     const { isLoading, ingredients } = this.state
     return (
       <IngredientsGridStyles className="ingredients-grid">
-        <SubHeader titleText="All Ingredients" />
+        <div className="ingredients-grid__suheader">
+          <h3 className="ingredients-grid__suheader__title">
+            All Ingredients
+          </h3>
+          <CustomModal />
+        </div>
         <div className="ingredients-grid__container">
           {!isLoading &&
             ingredients.map((ingredient, index) => {
@@ -83,6 +88,14 @@ const IngredientsGridStyles = styled.div`
   display: flex;
   flex-flow: column;
   .ingredients-grid {
+    &__suheader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &__title {
+        margin: 31.25px auto;
+      }
+    }
     &__container {
       display: flex;
       flex-flow: row;

@@ -4,7 +4,7 @@ import styled from '../styled'
 import { SubHeader } from './'
 import { StyledButton } from './styled/'
 
-export const IngredientForm: React.ReactNode = () => {
+export const IngredientForm: React.FunctionComponent<{}> = () => {
   return (
     <IngredientFormStyles>
       <SubHeader titleText="add new ingredient" />
@@ -55,7 +55,7 @@ export const IngredientForm: React.ReactNode = () => {
           </div>
         </fieldset>
         <StyledButton className="ingredient__form__submit">
-          Save Ingredient
+          Save
         </StyledButton>
       </form>
     </IngredientFormStyles>
@@ -64,7 +64,7 @@ export const IngredientForm: React.ReactNode = () => {
 
 const IngredientFormStyles = styled.div`
   .subheader__icon {
-    background-image: url(/svg/icon--x.svg);
+    background-image: none;
   }
   .border {
     width: 70%;
