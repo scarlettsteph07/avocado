@@ -8,6 +8,7 @@ export const StyledButton = styled.button`
   background-size: 15px 14px;
   box-shadow: none;
   box-sizing: border-box;
+  border-radius: 3px;
   color: black;
   display: inline-block;
   font-family: ${({ theme }) => theme.baseFont};

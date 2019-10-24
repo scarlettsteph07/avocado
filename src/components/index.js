@@ -1,6 +1,7 @@
 export * from './Body'
 export * from './Footer'
 export * from './Header'
+export * from './IngredientForm'
 export * from './IngredientsGrid'
 export * from './IngredientsList'
 export * from './IngredientPage'
