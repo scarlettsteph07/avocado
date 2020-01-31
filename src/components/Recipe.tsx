@@ -1,9 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import _ from 'lodash'
 
 import styled from '../styled'
-import { API_DEV_USER, API_URL } from '../lib/appConstants'
 import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
 
@@ -31,7 +29,6 @@ export class Recipe extends React.Component<Props, State> {
   componentDidMount = (): void => {
     this._isMounted = true
     this.setState({ isLoading: true })
-    this.fetchIngredients(this.state.payload)
     const { handleFetchInitialData } = this.props
     handleFetchInitialData(this.state.payload)
   }
@@ -40,41 +37,15 @@ export class Recipe extends React.Component<Props, State> {
     this._isMounted = false
   }
 
-  fetchIngredients = (data: Payload): void => {
-    const axiosInstance = axios.create({
-      baseURL: API_URL,
-      headers: {
-        'x-user-key': API_DEV_USER,
-      },
-    })
-
-    axiosInstance
-      .post(API_URL, data)
-      .then((response) => {
-        if (this._isMounted) {
-          const { ingredients } = response.data
-          this.setState({
-            ingredients: _.orderBy(
-              ingredients,
-              ['name', 'style'],
-              ['asc'],
-            ),
-            isLoading: false,
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
   handleOnButtonClick = (): void => {
-    this.fetchIngredients(this.state.payload)
+    const { handleFetchRecipe } = this.props
+    handleFetchRecipe(this.state.payload)
   }
 
   updateDietPreference = (
     newDietPreference: DietPreference,
   ): void => {
+    const { handleFetchRecipe } = this.props
     this.setState(
       (prevState) => ({
         payload: {
@@ -82,11 +53,12 @@ export class Recipe extends React.Component<Props, State> {
           dietPreference: newDietPreference,
         },
       }),
-      () => this.fetchIngredients(this.state.payload),
+      () => handleFetchRecipe(this.state.payload),
     )
   }
 
   updateNumberOfIngredients = (numOfIngredients: number): void => {
+    const { handleFetchRecipe } = this.props
     this.setState(
       (prevState) => ({
         payload: {
@@ -94,7 +66,7 @@ export class Recipe extends React.Component<Props, State> {
           numOfOptionalIngredients: numOfIngredients,
         },
       }),
-      () => this.fetchIngredients(this.state.payload),
+      () => handleFetchRecipe(this.state.payload),
     )
   }
 
@@ -113,6 +85,7 @@ export class Recipe extends React.Component<Props, State> {
     )
     const ignoredIngredients = this.state.payload.ignoredIngredients
     ignoredIngredients.push(ingredientToIgnore)
+    const { handleFetchRecipe } = this.props
     this.setState(
       (prevState) => ({
         payload: {
@@ -121,18 +94,17 @@ export class Recipe extends React.Component<Props, State> {
           requestedIngredients,
         },
       }),
-      () => this.fetchIngredients(this.state.payload),
+      () => handleFetchRecipe(this.state.payload),
     )
   }
 
   render(): React.ReactNode {
-    // const { recipe } = this.props
-    const { isLoading, ingredients, payload } = this.state
+    const { recipe } = this.props
+    const { isLoading, payload } = this.state
     return (
       <RecipeStyles className="recipe">
         <IngredientsList
-          // ingredients={recipe}
-          ingredients={ingredients}
+          ingredients={recipe}
           updateIgnoredIngredients={this.updateIgnoredIngredients}
         />
         <Settings

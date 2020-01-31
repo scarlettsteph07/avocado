@@ -1,6 +1,7 @@
 import { connect, ConnectedProps } from 'react-redux'
 
 import { handleFetchInitialData } from '../actions'
+import { handleFetchRecipe } from '../actions/recipe'
 import { Recipe } from './'
 
 import { Ingredient } from '../types/'
@@ -15,6 +16,7 @@ const mapStateToProps = ({ recipe }: RootState): State => ({
 })
 const mapDispatchToProps = {
   handleFetchInitialData,
+  handleFetchRecipe,
 }
 
 const connector = connect(
