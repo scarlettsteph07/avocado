@@ -9,15 +9,11 @@ import { Ingredient, Payload, DietPreference } from '../types/'
 import { Props } from './RecipeContainer'
 
 interface State {
-  isLoading: boolean
-  ingredients: Array<Ingredient>
   payload: Payload
 }
 export class Recipe extends React.Component<Props, State> {
   _isMounted = false
   state: State = {
-    isLoading: false,
-    ingredients: [],
     payload: {
       dietPreference: 'carnivore',
       ignoredIngredients: [],
@@ -28,7 +24,6 @@ export class Recipe extends React.Component<Props, State> {
 
   componentDidMount = (): void => {
     this._isMounted = true
-    this.setState({ isLoading: true })
     const { handleFetchInitialData } = this.props
     handleFetchInitialData(this.state.payload)
   }
@@ -99,8 +94,12 @@ export class Recipe extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
-    const { recipe } = this.props
-    const { isLoading, payload } = this.state
+    const { recipe, loading } = this.props
+    const { payload } = this.state
+
+    if (loading) {
+      return <h3>Loading...</h3>
+    }
     return (
       <RecipeStyles className="recipe">
         <IngredientsList
@@ -113,14 +112,13 @@ export class Recipe extends React.Component<Props, State> {
           updateNumberOfIngredients={this.updateNumberOfIngredients}
           numOfIngredients={payload.numOfOptionalIngredients}
         />
-        {!isLoading && (
-          <RandomizeButton
-            className="randomize-button"
-            onClick={this.handleOnButtonClick}
-          >
-            Reset!
-          </RandomizeButton>
-        )}
+        <RandomizeButton
+          className="randomize-button"
+          onClick={this.handleOnButtonClick}
+        >
+          Reset!
+        </RandomizeButton>
+        )
       </RecipeStyles>
     )
   }

@@ -9,6 +9,8 @@ export type RootState = ReturnType<typeof reducers>
 
 export type RecipeState = Ingredient[]
 
+export type LoadingState = boolean
+
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,

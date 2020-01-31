@@ -9,10 +9,12 @@ import { RootState } from '../types/store'
 
 interface State {
   recipe: Ingredient[]
+  loading: boolean
 }
 
-const mapStateToProps = ({ recipe }: RootState): State => ({
+const mapStateToProps = ({ recipe, loading }: RootState): State => ({
   recipe,
+  loading,
 })
 const mapDispatchToProps = {
   handleFetchInitialData,
