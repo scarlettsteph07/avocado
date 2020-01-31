@@ -1,7 +1,7 @@
 export type Ingredient = {
   name: string
-  style: string
   required: boolean
+  style: string
 }
 
 export type DietPreference = 'carnivore' | 'vegan' | 'vegetarian'

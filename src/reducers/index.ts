@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux'
 
-export const reducers = combineReducers({})
+import { recipe } from './recipe'
+
+export const reducers = combineReducers({ recipe })

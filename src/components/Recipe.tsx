@@ -8,22 +8,22 @@ import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
 
 import { Ingredient, Payload, DietPreference } from '../types/'
+import { Props } from './RecipeContainer'
 
 interface State {
   isLoading: boolean
   ingredients: Array<Ingredient>
   payload: Payload
 }
-
-export class Recipe extends React.Component<{}, State> {
+export class Recipe extends React.Component<Props, State> {
   _isMounted = false
   state: State = {
     isLoading: false,
     ingredients: [],
     payload: {
       dietPreference: 'carnivore',
-      numOfOptionalIngredients: 3,
       ignoredIngredients: [],
+      numOfOptionalIngredients: 3,
       requestedIngredients: [],
     },
   }
@@ -31,21 +31,13 @@ export class Recipe extends React.Component<{}, State> {
   componentDidMount = (): void => {
     this._isMounted = true
     this.setState({ isLoading: true })
-    this.fetchIngredients(this.setPayload())
+    this.fetchIngredients(this.state.payload)
+    const { handleFetchInitialData } = this.props
+    handleFetchInitialData(this.state.payload)
   }
 
   componentWillUnmount = (): void => {
     this._isMounted = false
-  }
-
-  setPayload = (): Payload => {
-    const { payload } = this.state
-    return {
-      dietPreference: payload.dietPreference,
-      numOfOptionalIngredients: payload.numOfOptionalIngredients,
-      ignoredIngredients: payload.ignoredIngredients,
-      requestedIngredients: payload.requestedIngredients,
-    }
   }
 
   fetchIngredients = (data: Payload): void => {
@@ -77,7 +69,7 @@ export class Recipe extends React.Component<{}, State> {
   }
 
   handleOnButtonClick = (): void => {
-    this.fetchIngredients(this.setPayload())
+    this.fetchIngredients(this.state.payload)
   }
 
   updateDietPreference = (
@@ -90,7 +82,7 @@ export class Recipe extends React.Component<{}, State> {
           dietPreference: newDietPreference,
         },
       }),
-      () => this.fetchIngredients(this.setPayload()),
+      () => this.fetchIngredients(this.state.payload),
     )
   }
 
@@ -102,7 +94,7 @@ export class Recipe extends React.Component<{}, State> {
           numOfOptionalIngredients: numOfIngredients,
         },
       }),
-      () => this.fetchIngredients(this.setPayload()),
+      () => this.fetchIngredients(this.state.payload),
     )
   }
 
@@ -129,15 +121,17 @@ export class Recipe extends React.Component<{}, State> {
           requestedIngredients,
         },
       }),
-      () => this.fetchIngredients(this.setPayload()),
+      () => this.fetchIngredients(this.state.payload),
     )
   }
 
   render(): React.ReactNode {
+    // const { recipe } = this.props
     const { isLoading, ingredients, payload } = this.state
     return (
       <RecipeStyles className="recipe">
         <IngredientsList
+          // ingredients={recipe}
           ingredients={ingredients}
           updateIgnoredIngredients={this.updateIgnoredIngredients}
         />

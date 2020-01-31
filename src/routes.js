@@ -9,7 +9,7 @@ import App from './App'
 import {
   IngredientsGrid,
   IngredientPage,
-  Recipe,
+  RecipeContainer,
 } from './components/'
 import { APPLICATION_PATHS as PATHS } from './lib/appConstants'
 
@@ -22,7 +22,7 @@ export const AppRouter = () => {
           path="/"
           render={(props) => (
             <App {...props}>
-              <Recipe />
+              <RecipeContainer />
             </App>
           )}
         />

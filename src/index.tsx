@@ -13,7 +13,6 @@ import { middleware } from './middleware'
 import * as serviceWorker from './serviceWorker'
 
 const store = createStore(reducers, middleware)
-console.log('store: ', store)
 
 ReactDOM.render(
   <Provider store={store}>
