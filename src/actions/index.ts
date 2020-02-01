@@ -1,5 +1,5 @@
-import { fetchInitialData, fetchAllIngredients } from '../helpers/api'
-import { receiveRecipe } from './recipe'
+import { fetchInitialData } from '../helpers/api'
+import { loadRecipe } from './recipe'
 import { loadIngredients } from './ingredients'
 
 import { InitialData } from '../helpers/api'
@@ -21,10 +21,9 @@ export const handleFetchInitialData = (
 ): AppThunk => (dispatch) => {
   return fetchInitialData(payload).then(
     ({ recipe, ingredients }: InitialData) => {
-      dispatch(receiveRecipe(recipe))
+      dispatch(loadRecipe(recipe))
       dispatch(loadIngredients(ingredients))
       dispatch(loadApp())
-      fetchAllIngredients('webapp-dev')
     },
   )
 }
