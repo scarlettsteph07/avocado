@@ -11,6 +11,8 @@ export type RecipeState = Ingredient[]
 
 export type LoadingState = boolean
 
+export type IngredientsState = Ingredient[]
+
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,

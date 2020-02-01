@@ -1,8 +1,13 @@
 import axios from 'axios'
 
-import { API_URL, API_DEV_USER } from '../lib/appConstants'
+import { API, API_URL, API_DEV_USER } from '../lib/appConstants'
 
 import { Payload, Ingredient } from '../types/'
+
+export type InitialData = {
+  recipe: Ingredient[]
+  ingredients: Ingredient[]
+}
 
 export const fetchRecipeIngredients = (
   data: Payload,
@@ -24,9 +29,36 @@ export const fetchRecipeIngredients = (
     })
 }
 
+export const fetchAllIngredients = (
+  userId: string,
+): Promise<Ingredient[]> => {
+  const axiosInstance = axios.create({
+    baseURL: API.ALL.URL,
+    headers: {
+      'x-user-key': userId,
+    },
+  })
+
+  return axiosInstance
+    .get(API.ALL.URL)
+    .then(({ data: ingredients }) => {
+      return ingredients
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 export const fetchInitialData = (
   data: Payload,
-): Promise<Ingredient[]> => {
-  return fetchRecipeIngredients(data)
-  // TODO: fetchAllIngredients()
+): Promise<InitialData> => {
+  return Promise.all([
+    fetchRecipeIngredients(data),
+    fetchAllIngredients(API_DEV_USER),
+  ]).then(([recipe, ingredients]) => {
+    return {
+      recipe,
+      ingredients,
+    }
+  })
 }
