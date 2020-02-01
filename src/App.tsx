@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { Body, Footer, Header } from './components/'
 
-type Props = {
-  children: React.FunctionComponent
-}
+import { DEFAULT_PAYLOAD } from './lib/appConstants'
 
-const App: React.FunctionComponent<Props> = ({ children }: Props) => {
-  return (
-    <div className="app">
-      <Header />
-      <Body>{children}</Body>
-      <Footer />
-    </div>
-  )
+import { Props } from './AppContainer'
+
+class App extends React.Component<Props> {
+  componentDidMount(): void {
+    const { handleFetchInitialData } = this.props
+    handleFetchInitialData(DEFAULT_PAYLOAD)
+  }
+
+  render(): React.ReactNode {
+    const { children, loading } = this.props
+    return (
+      <div className="app">
+        <Header />
+        {loading ? null : (
+          <Fragment>
+            <Body>{children}</Body>
+            <Footer />
+          </Fragment>
+        )}
+      </div>
+    )
+  }
 }
 
 export default App

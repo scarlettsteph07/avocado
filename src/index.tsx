@@ -1,17 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ThemeProvider } from 'emotion-theming'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import './index.css'
 import { AppRouter } from './routes'
 import { theme } from './theme'
+import { reducers } from './reducers'
+import { middleware } from './middleware'
 
 import * as serviceWorker from './serviceWorker'
 
+const store = createStore(reducers, middleware)
+
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <AppRouter />
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <AppRouter />
+    </ThemeProvider>
+  </Provider>,
   document.getElementById('root'),
 )
 

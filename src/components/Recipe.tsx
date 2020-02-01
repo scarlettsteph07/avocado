@@ -1,88 +1,31 @@
 import React from 'react'
-import axios from 'axios'
 import _ from 'lodash'
 
 import styled from '../styled'
-import { API_DEV_USER, API_URL } from '../lib/appConstants'
 import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
+import { DEFAULT_PAYLOAD } from '../lib/appConstants'
 
 import { Ingredient, Payload, DietPreference } from '../types/'
+import { Props } from './RecipeContainer'
 
 interface State {
-  isLoading: boolean
-  ingredients: Array<Ingredient>
   payload: Payload
 }
-
-export class Recipe extends React.Component<{}, State> {
-  _isMounted = false
+export class Recipe extends React.Component<Props, State> {
   state: State = {
-    isLoading: false,
-    ingredients: [],
-    payload: {
-      dietPreference: 'carnivore',
-      numOfOptionalIngredients: 3,
-      ignoredIngredients: [],
-      requestedIngredients: [],
-    },
-  }
-
-  componentDidMount = (): void => {
-    this._isMounted = true
-    this.setState({ isLoading: true })
-    this.fetchIngredients(this.setPayload())
-  }
-
-  componentWillUnmount = (): void => {
-    this._isMounted = false
-  }
-
-  setPayload = (): Payload => {
-    const { payload } = this.state
-    return {
-      dietPreference: payload.dietPreference,
-      numOfOptionalIngredients: payload.numOfOptionalIngredients,
-      ignoredIngredients: payload.ignoredIngredients,
-      requestedIngredients: payload.requestedIngredients,
-    }
-  }
-
-  fetchIngredients = (data: Payload): void => {
-    const axiosInstance = axios.create({
-      baseURL: API_URL,
-      headers: {
-        'x-user-key': API_DEV_USER,
-      },
-    })
-
-    axiosInstance
-      .post(API_URL, data)
-      .then((response) => {
-        if (this._isMounted) {
-          const { ingredients } = response.data
-          this.setState({
-            ingredients: _.orderBy(
-              ingredients,
-              ['name', 'style'],
-              ['asc'],
-            ),
-            isLoading: false,
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    payload: DEFAULT_PAYLOAD,
   }
 
   handleOnButtonClick = (): void => {
-    this.fetchIngredients(this.setPayload())
+    const { handleFetchRecipe } = this.props
+    handleFetchRecipe(this.state.payload)
   }
 
   updateDietPreference = (
     newDietPreference: DietPreference,
   ): void => {
+    const { handleFetchRecipe } = this.props
     this.setState(
       (prevState) => ({
         payload: {
@@ -90,11 +33,12 @@ export class Recipe extends React.Component<{}, State> {
           dietPreference: newDietPreference,
         },
       }),
-      () => this.fetchIngredients(this.setPayload()),
+      () => handleFetchRecipe(this.state.payload),
     )
   }
 
   updateNumberOfIngredients = (numOfIngredients: number): void => {
+    const { handleFetchRecipe } = this.props
     this.setState(
       (prevState) => ({
         payload: {
@@ -102,7 +46,7 @@ export class Recipe extends React.Component<{}, State> {
           numOfOptionalIngredients: numOfIngredients,
         },
       }),
-      () => this.fetchIngredients(this.setPayload()),
+      () => handleFetchRecipe(this.state.payload),
     )
   }
 
@@ -121,6 +65,7 @@ export class Recipe extends React.Component<{}, State> {
     )
     const ignoredIngredients = this.state.payload.ignoredIngredients
     ignoredIngredients.push(ingredientToIgnore)
+    const { handleFetchRecipe } = this.props
     this.setState(
       (prevState) => ({
         payload: {
@@ -129,16 +74,18 @@ export class Recipe extends React.Component<{}, State> {
           requestedIngredients,
         },
       }),
-      () => this.fetchIngredients(this.setPayload()),
+      () => handleFetchRecipe(this.state.payload),
     )
   }
 
   render(): React.ReactNode {
-    const { isLoading, ingredients, payload } = this.state
+    const { recipe } = this.props
+    const { payload } = this.state
+
     return (
       <RecipeStyles className="recipe">
         <IngredientsList
-          ingredients={ingredients}
+          ingredients={recipe}
           updateIgnoredIngredients={this.updateIgnoredIngredients}
         />
         <Settings
@@ -147,14 +94,13 @@ export class Recipe extends React.Component<{}, State> {
           updateNumberOfIngredients={this.updateNumberOfIngredients}
           numOfIngredients={payload.numOfOptionalIngredients}
         />
-        {!isLoading && (
-          <RandomizeButton
-            className="randomize-button"
-            onClick={this.handleOnButtonClick}
-          >
-            Reset!
-          </RandomizeButton>
-        )}
+        <RandomizeButton
+          className="randomize-button"
+          onClick={this.handleOnButtonClick}
+        >
+          Reset!
+        </RandomizeButton>
+        )
       </RecipeStyles>
     )
   }

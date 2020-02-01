@@ -5,12 +5,12 @@ import {
   Switch,
 } from 'react-router-dom'
 
-import App from './App'
 import {
-  IngredientsGrid,
+  IngredientsGridContainer,
   IngredientPage,
-  Recipe,
+  RecipeContainer,
 } from './components/'
+import { AppContainer } from './AppContainer'
 import { APPLICATION_PATHS as PATHS } from './lib/appConstants'
 
 export const AppRouter = () => {
@@ -21,27 +21,27 @@ export const AppRouter = () => {
           exact
           path="/"
           render={(props) => (
-            <App {...props}>
-              <Recipe />
-            </App>
+            <AppContainer {...props}>
+              <RecipeContainer />
+            </AppContainer>
           )}
         />
         <Route
           exact
           path={`/${PATHS.INGREDIENTS}`}
           render={(props) => (
-            <App {...props}>
-              <IngredientsGrid {...props} />
-            </App>
+            <AppContainer {...props}>
+              <IngredientsGridContainer />
+            </AppContainer>
           )}
         />
         <Route
           exact
           path={`/${PATHS.INGREDIENTS}/:ingredientId`}
           render={(props) => (
-            <App {...props}>
+            <AppContainer {...props}>
               <IngredientPage {...props} />
-            </App>
+            </AppContainer>
           )}
         />
       </Switch>
