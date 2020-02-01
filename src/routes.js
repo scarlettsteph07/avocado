@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 import {
-  IngredientsGrid,
+  IngredientsGridContainer,
   IngredientPage,
   RecipeContainer,
 } from './components/'
@@ -31,7 +31,7 @@ export const AppRouter = () => {
           path={`/${PATHS.INGREDIENTS}`}
           render={(props) => (
             <AppContainer {...props}>
-              <IngredientsGrid {...props} />
+              <IngredientsGridContainer />
             </AppContainer>
           )}
         />
