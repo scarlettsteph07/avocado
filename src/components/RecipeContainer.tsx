@@ -4,11 +4,11 @@ import { handleFetchInitialData } from '../actions'
 import { handleFetchRecipe } from '../actions/recipe'
 import { Recipe } from './'
 
-import { Ingredient } from '../types/'
+import { RecipeIngredient } from '../types/'
 import { RootState } from '../types/store'
 
 interface State {
-  recipe: Ingredient[]
+  recipe: RecipeIngredient[]
   loading: boolean
 }
 

@@ -1,19 +1,19 @@
 import { fetchRecipeIngredients } from '../helpers/api'
 
-import { Ingredient, Payload } from '../types/'
+import { RecipeIngredient, Payload } from '../types/'
 import { AppThunk } from '../types/store'
 
 export const LOAD_RECIPE = 'LOAD_RECIPE'
 
 interface LoadRecipeAction {
   type: typeof LOAD_RECIPE
-  recipe: Ingredient[]
+  recipe: RecipeIngredient[]
 }
 
 export type RecipeActionTypes = LoadRecipeAction
 
 export const loadRecipe = (
-  recipe: Ingredient[],
+  recipe: RecipeIngredient[],
 ): LoadRecipeAction => ({
   type: LOAD_RECIPE,
   recipe,

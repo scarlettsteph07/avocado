@@ -6,7 +6,7 @@ import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
 import { DEFAULT_PAYLOAD } from '../lib/appConstants'
 
-import { Ingredient, Payload, DietPreference } from '../types/'
+import { RecipeIngredient, Payload, DietPreference } from '../types/'
 import { Props } from './RecipeContainer'
 
 interface State {
@@ -51,8 +51,8 @@ export class Recipe extends React.Component<Props, State> {
   }
 
   updateIgnoredIngredients = (
-    currentIngredients: Array<Ingredient>,
-    ingredientToIgnore: Ingredient,
+    currentIngredients: Array<RecipeIngredient>,
+    ingredientToIgnore: RecipeIngredient,
   ): void => {
     const requestedIngredients = _.remove(
       currentIngredients,
@@ -100,7 +100,6 @@ export class Recipe extends React.Component<Props, State> {
         >
           Reset!
         </RandomizeButton>
-        )
       </RecipeStyles>
     )
   }

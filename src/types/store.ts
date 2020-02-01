@@ -3,11 +3,11 @@ import { ThunkAction } from 'redux-thunk'
 
 import { reducers } from '../reducers'
 
-import { Ingredient } from './'
+import { Ingredient, RecipeIngredient } from './'
 
 export type RootState = ReturnType<typeof reducers>
 
-export type RecipeState = Ingredient[]
+export type RecipeState = RecipeIngredient[]
 
 export type LoadingState = boolean
 
