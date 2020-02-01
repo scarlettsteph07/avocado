@@ -4,6 +4,7 @@ import _ from 'lodash'
 import styled from '../styled'
 import { IngredientsList, Settings } from './'
 import { StyledButton } from './styled/'
+import { DEFAULT_PAYLOAD } from '../lib/appConstants'
 
 import { Ingredient, Payload, DietPreference } from '../types/'
 import { Props } from './RecipeContainer'
@@ -12,24 +13,8 @@ interface State {
   payload: Payload
 }
 export class Recipe extends React.Component<Props, State> {
-  _isMounted = false
   state: State = {
-    payload: {
-      dietPreference: 'carnivore',
-      ignoredIngredients: [],
-      numOfOptionalIngredients: 3,
-      requestedIngredients: [],
-    },
-  }
-
-  componentDidMount = (): void => {
-    this._isMounted = true
-    const { handleFetchInitialData } = this.props
-    handleFetchInitialData(this.state.payload)
-  }
-
-  componentWillUnmount = (): void => {
-    this._isMounted = false
+    payload: DEFAULT_PAYLOAD,
   }
 
   handleOnButtonClick = (): void => {
@@ -94,12 +79,9 @@ export class Recipe extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
-    const { recipe, loading } = this.props
+    const { recipe } = this.props
     const { payload } = this.state
 
-    if (loading) {
-      return <h3>Loading...</h3>
-    }
     return (
       <RecipeStyles className="recipe">
         <IngredientsList
