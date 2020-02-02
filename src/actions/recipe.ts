@@ -1,36 +1,21 @@
 import { fetchRecipeIngredients } from '../helpers/api'
 
-import { Ingredient, Payload } from '../types/'
+import { RecipeIngredient, Payload } from '../types/'
 import { AppThunk } from '../types/store'
 
-export const RECEIVE_RECIPE = 'RECEIVE_RECIPE'
-export const FETCH_RECIPE = 'FETCH_RECIPE'
+export const LOAD_RECIPE = 'LOAD_RECIPE'
 
-interface ReceiveRecipeAction {
-  type: typeof RECEIVE_RECIPE
-  recipe: Ingredient[]
+interface LoadRecipeAction {
+  type: typeof LOAD_RECIPE
+  recipe: RecipeIngredient[]
 }
 
-interface FetchRecipeAction {
-  type: typeof FETCH_RECIPE
-  recipe: Ingredient[]
-}
+export type RecipeActionTypes = LoadRecipeAction
 
-export type RecipeActionTypes =
-  | ReceiveRecipeAction
-  | FetchRecipeAction
-
-export const receiveRecipe = (
-  recipe: Ingredient[],
-): ReceiveRecipeAction => ({
-  type: RECEIVE_RECIPE,
-  recipe,
-})
-
-export const fetchRecipe = (
-  recipe: Ingredient[],
-): FetchRecipeAction => ({
-  type: FETCH_RECIPE,
+export const loadRecipe = (
+  recipe: RecipeIngredient[],
+): LoadRecipeAction => ({
+  type: LOAD_RECIPE,
   recipe,
 })
 
@@ -38,6 +23,6 @@ export const handleFetchRecipe = (payload: Payload): AppThunk => (
   dispatch,
 ) => {
   return fetchRecipeIngredients(payload).then((recipe) => {
-    dispatch(fetchRecipe(recipe))
+    dispatch(loadRecipe(recipe))
   })
 }

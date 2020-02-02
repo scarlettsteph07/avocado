@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import styled from '../styled'
 import { APPLICATION_PATHS as PATHS } from '../lib/appConstants'
-import { SubHeader } from './'
+import { CustomModal } from './'
 
 import { Props } from './IngredientsGridContainer'
 
@@ -12,7 +12,12 @@ export class IngredientsGrid extends React.Component<Props, {}> {
     const { ingredients } = this.props
     return (
       <IngredientsGridStyles className="ingredients-grid">
-        <SubHeader titleText="All Ingredients" />
+        <div className="ingredients-grid__suheader">
+          <h3 className="ingredients-grid__suheader__title">
+            All Ingredients
+          </h3>
+          <CustomModal />
+        </div>
         <div className="ingredients-grid__container">
           {ingredients.map((ingredient, index) => {
             return (
@@ -37,6 +42,14 @@ const IngredientsGridStyles = styled.div`
   display: flex;
   flex-flow: column;
   .ingredients-grid {
+    &__suheader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &__title {
+        margin: 31.25px auto;
+      }
+    }
     &__container {
       display: flex;
       flex-flow: row;

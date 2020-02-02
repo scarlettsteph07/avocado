@@ -9,10 +9,10 @@ import {
   StyledButton,
 } from './styled/'
 
-import { Ingredient } from '../types/'
+import { RecipeIngredient } from '../types/'
 
 interface Props {
-  ingredients: Array<Ingredient>
+  ingredients: Array<RecipeIngredient>
   updateIgnoredIngredients: Function
 }
 

@@ -9,6 +9,10 @@ export const API = {
     URL: 'https://api.toastandavocado.xyz/v1/ingredients',
     METHOD: 'GET',
   },
+  NEW: {
+    URL: 'https://api.toastandavocado.xyz/v1/ingredients/new',
+    METHOD: 'POST',
+  },
 }
 
 export const APPLICATION_PATHS = {
