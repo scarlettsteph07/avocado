@@ -18,8 +18,9 @@ const loadApp = (): LoadAppAction => ({ type: LOAD_APP })
 
 export const handleFetchInitialData = (
   payload: Payload,
-): AppThunk => (dispatch) => {
-  return fetchInitialData(payload).then(
+): AppThunk => (dispatch, getState) => {
+  const { authedUser } = getState()
+  return fetchInitialData(authedUser, payload).then(
     ({ recipe, ingredients }: InitialData) => {
       dispatch(loadRecipe(recipe))
       dispatch(loadIngredients(ingredients))

@@ -21,8 +21,12 @@ export const loadRecipe = (
 
 export const handleFetchRecipe = (payload: Payload): AppThunk => (
   dispatch,
+  getState,
 ) => {
-  return fetchRecipeIngredients(payload).then((recipe) => {
-    dispatch(loadRecipe(recipe))
-  })
+  const { authedUser } = getState()
+  return fetchRecipeIngredients(authedUser, payload).then(
+    (recipe) => {
+      dispatch(loadRecipe(recipe))
+    },
+  )
 }
