@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Fingerprint2 from 'fingerprintjs2'
 
 import { API, API_URL } from '../lib/appConstants'
 
@@ -90,4 +91,19 @@ export const saveIngredient = (
     .catch((error) => {
       console.log(error)
     })
+}
+
+export const getUserId = (): Promise<string> => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      Fingerprint2.get((components) => {
+        const values = components.map((component) => component.value)
+        const fingerprint = Fingerprint2.x64hash128(
+          values.join(''),
+          31,
+        )
+        res(fingerprint)
+      })
+    }, 500)
+  })
 }

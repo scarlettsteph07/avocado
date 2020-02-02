@@ -1,8 +1,12 @@
-import { fetchInitialData } from '../helpers/api'
+import {
+  fetchInitialData,
+  getUserId,
+  InitialData,
+} from '../helpers/api'
 import { loadRecipe } from './recipe'
 import { loadIngredients } from './ingredients'
+import { setAuthedUser } from './authedUser'
 
-import { InitialData } from '../helpers/api'
 import { Payload } from '../types/'
 import { AppThunk } from '../types/store'
 
@@ -19,12 +23,16 @@ const loadApp = (): LoadAppAction => ({ type: LOAD_APP })
 export const handleFetchInitialData = (
   payload: Payload,
 ): AppThunk => (dispatch, getState) => {
-  const { authedUser } = getState()
-  return fetchInitialData(authedUser, payload).then(
-    ({ recipe, ingredients }: InitialData) => {
-      dispatch(loadRecipe(recipe))
-      dispatch(loadIngredients(ingredients))
-      dispatch(loadApp())
-    },
-  )
+  getUserId()
+    .then((userId: string) => dispatch(setAuthedUser(userId)))
+    .then(() => {
+      const { authedUser } = getState()
+      return fetchInitialData(authedUser, payload).then(
+        ({ recipe, ingredients }: InitialData) => {
+          dispatch(loadRecipe(recipe))
+          dispatch(loadIngredients(ingredients))
+          dispatch(loadApp())
+        },
+      )
+    })
 }
