@@ -1,65 +1,168 @@
 import React from 'react'
+import _ from 'lodash'
 
 import styled from '../styled'
 import { SubHeader } from './'
 import { StyledButton } from './styled/'
+import { Props } from './IngredientFormContainer'
 
-export const IngredientForm: React.FunctionComponent<{}> = () => {
-  return (
-    <IngredientFormStyles>
-      <SubHeader titleText="add new ingredient" />
-      <form className="ingredient__form" action="">
-        <input
-          className="ingredient__form__text-input border"
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-        />
-        <input
-          className="ingredient__form__text-input border"
-          type="text"
-          id="style"
-          name="style"
-          placeholder="Style"
-        />
-        <fieldset className="ingredient__form__option border">
-          <legend>Type</legend>
-          <div className="ingredient__form__option__item">
-            <input type="checkbox" id="all" name="type" />
-            <label htmlFor="all">All</label>
-          </div>
-          <div className="ingredient__form__option__item">
-            <input type="checkbox" id="carnivore" name="type" />
-            <label htmlFor="carnivore">Carnivore</label>
-          </div>
-          <div className="ingredient__form__option__item">
-            <input type="checkbox" id="vegetarian" name="type" />
-            <label htmlFor="vegetarian">Vegetarian</label>
-          </div>
-          <div className="ingredient__form__option__item">
-            <input type="checkbox" id="vegan" name="type" />
-            <label htmlFor="vegan">Vegan</label>
-          </div>
-        </fieldset>
+interface State {
+  name: string
+  required: boolean
+  style: string
+  type: string[]
+}
 
-        <fieldset className="ingredient__form__option border">
-          <legend>Required</legend>
-          <div className="ingredient__form__option__item">
-            <input type="radio" id="yes" name="required" />
-            <label htmlFor="yes">Yes</label>
-          </div>
-          <div className="ingredient__form__option__item">
-            <input type="radio" id="no" name="required" />
-            <label htmlFor="no">No</label>
-          </div>
-        </fieldset>
-        <StyledButton className="ingredient__form__submit">
-          Save
-        </StyledButton>
-      </form>
-    </IngredientFormStyles>
-  )
+export class IngredientForm extends React.Component<Props, State> {
+  state: State = {
+    name: '',
+    style: '',
+    type: ['carnivore'],
+    required: false,
+  }
+
+  saveIngredient = (event: React.FormEvent): void => {
+    event.preventDefault()
+    const { handleSaveIngredient, closeModal } = this.props
+    const { name, required, style, type } = this.state
+    const ingredient = {
+      name,
+      required,
+      style: style.split(','),
+      type,
+    }
+    handleSaveIngredient(ingredient)
+    closeModal()
+  }
+
+  handleInputOnChange = (
+    event: React.FormEvent<HTMLInputElement>,
+  ): void => {
+    const { name, value } = event.currentTarget
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  handleCheckboxOnChange = (
+    event: React.FormEvent<HTMLInputElement>,
+  ): void => {
+    const { type } = this.state
+    const { currentTarget } = event
+    const { id, checked } = currentTarget
+    checked ? type.push(id) : _.remove(type, (type) => type === id)
+    this.setState((prevState) => ({
+      ...prevState,
+      type,
+    }))
+  }
+
+  handleRadioOnChange = (
+    event: React.FormEvent<HTMLInputElement>,
+  ): void => {
+    const { currentTarget } = event
+    const { id, name, checked } = currentTarget
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: id === 'yes' ? checked : !checked,
+    }))
+  }
+
+  render(): React.ReactNode {
+    const { name, style, type, required } = this.state
+    return (
+      <IngredientFormStyles>
+        <SubHeader titleText="add new ingredient" />
+        <form
+          action=""
+          className="ingredient__form"
+          onSubmit={this.saveIngredient}
+        >
+          <input
+            className="ingredient__form__text-input border"
+            id="name"
+            name="name"
+            onChange={this.handleInputOnChange}
+            placeholder="Name"
+            required
+            type="text"
+            value={name}
+          />
+          <input
+            className="ingredient__form__text-input border"
+            id="style"
+            name="style"
+            onChange={this.handleInputOnChange}
+            placeholder="Style"
+            required
+            type="text"
+            value={style}
+          />
+          <fieldset className="ingredient__form__option border">
+            <legend>Type</legend>
+            <div className="ingredient__form__option__item">
+              <input
+                checked={type.includes('carnivore')}
+                id="carnivore"
+                name="type"
+                onChange={this.handleCheckboxOnChange}
+                type="checkbox"
+              />
+              <label htmlFor="carnivore">Carnivore</label>
+            </div>
+            <div className="ingredient__form__option__item">
+              <input
+                checked={type.includes('vegetarian')}
+                id="vegetarian"
+                name="type"
+                onChange={this.handleCheckboxOnChange}
+                type="checkbox"
+              />
+              <label htmlFor="vegetarian">Vegetarian</label>
+            </div>
+            <div className="ingredient__form__option__item">
+              <input
+                checked={type.includes('vegan')}
+                id="vegan"
+                name="type"
+                onChange={this.handleCheckboxOnChange}
+                type="checkbox"
+              />
+              <label htmlFor="vegan">Vegan</label>
+            </div>
+          </fieldset>
+
+          <fieldset className="ingredient__form__option border">
+            <legend>Required</legend>
+            <div className="ingredient__form__option__item">
+              <input
+                checked={required}
+                id="yes"
+                name="required"
+                onChange={this.handleRadioOnChange}
+                type="radio"
+              />
+              <label htmlFor="yes">Yes</label>
+            </div>
+            <div className="ingredient__form__option__item">
+              <input
+                checked={!required}
+                id="no"
+                name="required"
+                onChange={this.handleRadioOnChange}
+                type="radio"
+              />
+              <label htmlFor="no">No</label>
+            </div>
+          </fieldset>
+          <StyledButton className="ingredient__form__submit">
+            Save
+          </StyledButton>
+        </form>
+      </IngredientFormStyles>
+    )
+  }
 }
 
 const IngredientFormStyles = styled.div`
@@ -94,7 +197,7 @@ const IngredientFormStyles = styled.div`
           padding: 20px 75px;
         }
         ::placeholder {
-          color: ${({ theme }) => theme.textPrimary};
+          color: ${({ theme }) => theme.gray};
         }
       }
       &__option {
@@ -102,6 +205,10 @@ const IngredientFormStyles = styled.div`
         height: auto;
         display: flex;
         flex-flow: column;
+        font-size: 20px;
+        @media (min-width: ${({ theme }) => theme.medium.start}) {
+          font-size: 25px;
+        }
         &__item {
           padding: 5px 10px;
           display: flex;

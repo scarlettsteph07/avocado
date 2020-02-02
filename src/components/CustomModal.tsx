@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 
 import styled from '../styled'
-import { IngredientForm } from './'
+import { IngredientFormContainer } from './'
 import { StyledIconButton } from './styled/'
 
 type Props = {}
@@ -45,7 +45,7 @@ export const CustomModal: React.FunctionComponent<Props> = () => {
         style={customStyles}
       >
         <CloseIconButton onClick={closeModal} />
-        <IngredientForm />
+        <IngredientFormContainer closeModal={closeModal} />
       </Modal>
     </CustomModalStyles>
   )

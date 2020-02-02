@@ -39,6 +39,7 @@ type Theme = {
   white: string
   emerald: string
   lightGray: string
+  gray: string
   red: string
 }
 

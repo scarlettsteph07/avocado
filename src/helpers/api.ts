@@ -62,3 +62,30 @@ export const fetchInitialData = (
     }
   })
 }
+
+export const saveIngredient = (
+  userId: string,
+  data: Ingredient,
+): Promise<Ingredient | void> => {
+  const axiosInstance = axios.create({
+    baseURL: API.NEW.URL,
+    headers: {
+      'x-user-key': userId,
+    },
+  })
+
+  return axiosInstance
+    .post(API.NEW.URL, data)
+    .then(({ data }: { data: Ingredient }) => {
+      const { name, required, style, type }: Ingredient = data
+      return {
+        name,
+        required,
+        style,
+        type,
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}

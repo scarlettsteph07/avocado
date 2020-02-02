@@ -1,5 +1,6 @@
 import {
   LOAD_INGREDIENTS,
+  ADD_INGREDIENT,
   IngredientsActions,
 } from '../actions/ingredients'
 
@@ -11,7 +12,9 @@ export const ingredients = (
 ): IngredientsState => {
   switch (action.type) {
     case LOAD_INGREDIENTS:
-      return [...state, ...action.ingredients]
+      return action.ingredients
+    case ADD_INGREDIENT:
+      return [...state, action.ingredient]
     default:
       return state
   }

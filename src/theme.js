@@ -37,5 +37,6 @@ export const theme = {
   white: '#ffffff',
   emerald: '#4ed164',
   lightGray: '#DCDCDC',
+  gray: '#7a7a7a',
   red: '#FF0000',
 }
