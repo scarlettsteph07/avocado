@@ -12,7 +12,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >
 
-export type AuthedUserState = string | null
+export type UserState = string | null
 
 export type IngredientsState = Ingredient[]
 

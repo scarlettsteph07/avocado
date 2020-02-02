@@ -37,8 +37,8 @@ export const addIngredient = (
 export const handleSaveIngredient = (
   ingredient: Ingredient,
 ): AppThunk => (dispatch, getState) => {
-  const { authedUser } = getState()
-  return saveIngredient(authedUser, ingredient).then(() => {
+  const { user } = getState()
+  return saveIngredient(user, ingredient).then(() => {
     dispatch(addIngredient(ingredient))
   })
 }
