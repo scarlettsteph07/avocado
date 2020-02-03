@@ -26,9 +26,6 @@ export const fetchRecipeIngredients = (
     .then(({ data }) => {
       return data.ingredients
     })
-    .catch((error) => {
-      console.log(error)
-    })
 }
 
 export const fetchAllIngredients = (
@@ -45,9 +42,6 @@ export const fetchAllIngredients = (
     .get(API.ALL.URL)
     .then(({ data: ingredients }) => {
       return ingredients
-    })
-    .catch((error) => {
-      console.log(error)
     })
 }
 
@@ -88,9 +82,6 @@ export const saveIngredient = (
         type,
       }
     })
-    .catch((error) => {
-      console.log(error)
-    })
 }
 
 export const getUserId = (): Promise<string> => {
@@ -102,7 +93,10 @@ export const getUserId = (): Promise<string> => {
           values.join(''),
           31,
         )
-        res(fingerprint)
+        if (fingerprint) {
+          return res(fingerprint)
+        }
+        return rej('invalid fingerprint')
       })
     }, 500)
   })

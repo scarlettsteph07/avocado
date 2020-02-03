@@ -14,6 +14,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 export type UserState = string | null
 
+export type ErrorState = string | null
+
 export type IngredientsState = Ingredient[]
 
 export type LoadingState = boolean

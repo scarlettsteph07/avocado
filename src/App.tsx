@@ -13,8 +13,8 @@ class App extends React.Component<Props> {
   }
 
   render(): React.ReactNode {
-    const { children, loading } = this.props
-    return (
+    const { children, loading, error } = this.props
+    return !error ? (
       <div className="app">
         <Header />
         {loading ? null : (
@@ -24,7 +24,14 @@ class App extends React.Component<Props> {
           </Fragment>
         )}
       </div>
-    )
+    ) : (
+        <div className="app">
+          <Header />
+          <Fragment>
+            {error}
+          </Fragment>
+        </div>
+      )
   }
 }
 
