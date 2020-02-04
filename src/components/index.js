@@ -1,5 +1,6 @@
 export * from './Body'
 export * from './CustomModal'
+export * from './Error'
 export * from './Footer'
 export * from './Header'
 export * from './IngredientForm'
