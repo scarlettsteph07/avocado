@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styled from '../styled'
 import {
@@ -13,17 +14,17 @@ export const Header: React.FunctionComponent = () => {
     <HeaderStyles className="header">
       <StyledSlatOuter className="header__outer">
         <StyledSlatInner className="header__inner">
-          <a className="header__link" href="/">
+          <Link className="header__link" to="/">
             <img
               src="/img/avocado.png"
               className="header__icon"
               alt="avocado"
             />
             <h1 className="header__title">{APP_TITLE}</h1>
-          </a>
-          <a className="header__settings" href={PATHS.INGREDIENTS}>
+          </Link>
+          <Link className="header__settings" to={PATHS.INGREDIENTS}>
             <img src="/svg/icon--gear.svg" alt="settings" />
-          </a>
+          </Link>
         </StyledSlatInner>
       </StyledSlatOuter>
     </HeaderStyles>

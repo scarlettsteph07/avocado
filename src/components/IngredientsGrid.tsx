@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
 
 import styled from '../styled'
 import { APPLICATION_PATHS as PATHS } from '../lib/appConstants'
@@ -21,15 +22,15 @@ export class IngredientsGrid extends React.Component<Props, {}> {
         <div className="ingredients-grid__container">
           {ingredients.map((ingredient, index) => {
             return (
-              <a
+              <Link
                 className="ingredients-grid__item"
                 key={index}
-                href={`/${PATHS.INGREDIENTS}/${_.kebabCase(
+                to={`/${PATHS.INGREDIENTS}/${_.kebabCase(
                   ingredient.name,
                 )}`}
               >
                 <div>{ingredient.name}</div>
-              </a>
+              </Link>
             )
           })}
         </div>
