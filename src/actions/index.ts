@@ -1,7 +1,4 @@
-import {
-  fetchInitialData,
-  getUserId
-} from '../helpers/api'
+import { fetchInitialData, getUserId } from '../helpers/api'
 import { loadRecipe } from './recipe'
 import { loadIngredients } from './ingredients'
 import { setError } from './errors'
@@ -28,7 +25,10 @@ export const handleFetchInitialData = (
     dispatch(setUser(userId))
 
     const { user } = getState()
-    const { recipe, ingredients } = await fetchInitialData(user, payload)
+    const { recipe, ingredients } = await fetchInitialData(
+      user,
+      payload,
+    )
 
     dispatch(loadRecipe(recipe))
     dispatch(loadIngredients(ingredients))
@@ -36,5 +36,4 @@ export const handleFetchInitialData = (
   } catch (e) {
     dispatch(setError(e))
   }
-
 }

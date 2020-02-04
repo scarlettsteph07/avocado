@@ -6,13 +6,13 @@ import { handleFetchInitialData } from './actions'
 import { RootState } from './types/store'
 
 export interface State {
-  loading: boolean,
+  loading: boolean
   error: string
 }
 
 const mapStateToProps = ({ loading, error }: RootState): State => ({
   loading,
-  error
+  error,
 })
 
 const mapDispatchToProps = {

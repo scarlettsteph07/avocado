@@ -21,11 +21,9 @@ export const fetchRecipeIngredients = (
     },
   })
 
-  return axiosInstance
-    .post(API_URL, data)
-    .then(({ data }) => {
-      return data.ingredients
-    })
+  return axiosInstance.post(API_URL, data).then(({ data }) => {
+    return data.ingredients
+  })
 }
 
 export const fetchAllIngredients = (

@@ -25,13 +25,11 @@ class App extends React.Component<Props> {
         )}
       </div>
     ) : (
-        <div className="app">
-          <Header />
-          <Fragment>
-            {error}
-          </Fragment>
-        </div>
-      )
+      <div className="app">
+        <Header />
+        <Fragment>{error}</Fragment>
+      </div>
+    )
   }
 }
 

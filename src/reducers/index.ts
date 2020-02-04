@@ -11,5 +11,5 @@ export const reducers = combineReducers({
   recipe,
   ingredients,
   loading,
-  error
+  error,
 })
