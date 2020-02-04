@@ -1,5 +1,4 @@
 import { saveIngredient } from '../helpers/api'
-import { API_DEV_USER } from '../lib/appConstants'
 
 import { Ingredient } from '../types/'
 import { AppThunk } from '../types/store'
@@ -37,8 +36,9 @@ export const addIngredient = (
 
 export const handleSaveIngredient = (
   ingredient: Ingredient,
-): AppThunk => (dispatch) => {
-  return saveIngredient(API_DEV_USER, ingredient).then(() => {
+): AppThunk => (dispatch, getState) => {
+  const { user } = getState()
+  return saveIngredient(user, ingredient).then(() => {
     dispatch(addIngredient(ingredient))
   })
 }

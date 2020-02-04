@@ -1,6 +1,7 @@
 import axios from 'axios'
+import Fingerprint2 from 'fingerprintjs2'
 
-import { API, API_URL, API_DEV_USER } from '../lib/appConstants'
+import { API, API_URL } from '../lib/appConstants'
 
 import { Payload, Ingredient, RecipeIngredient } from '../types/'
 
@@ -10,23 +11,19 @@ export type InitialData = {
 }
 
 export const fetchRecipeIngredients = (
+  userId: string,
   data: Payload,
 ): Promise<RecipeIngredient[]> => {
   const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
-      'x-user-key': API_DEV_USER,
+      'x-user-key': userId,
     },
   })
 
-  return axiosInstance
-    .post(API_URL, data)
-    .then(({ data }) => {
-      return data.ingredients
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  return axiosInstance.post(API_URL, data).then(({ data }) => {
+    return data.ingredients
+  })
 }
 
 export const fetchAllIngredients = (
@@ -44,17 +41,15 @@ export const fetchAllIngredients = (
     .then(({ data: ingredients }) => {
       return ingredients
     })
-    .catch((error) => {
-      console.log(error)
-    })
 }
 
 export const fetchInitialData = (
+  userId: string,
   data: Payload,
 ): Promise<InitialData> => {
   return Promise.all([
-    fetchRecipeIngredients(data),
-    fetchAllIngredients(API_DEV_USER),
+    fetchRecipeIngredients(userId, data),
+    fetchAllIngredients(userId),
   ]).then(([recipe, ingredients]) => {
     return {
       recipe,
@@ -85,7 +80,22 @@ export const saveIngredient = (
         type,
       }
     })
-    .catch((error) => {
-      console.log(error)
-    })
+}
+
+export const getUserId = (): Promise<string> => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      Fingerprint2.get((components) => {
+        const values = components.map((component) => component.value)
+        const fingerprint = Fingerprint2.x64hash128(
+          values.join(''),
+          31,
+        )
+        if (fingerprint) {
+          return res(fingerprint)
+        }
+        return rej('invalid fingerprint')
+      })
+    }, 500)
+  })
 }

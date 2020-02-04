@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { Body, Footer, Header } from './components/'
+import { Body, Error, Footer, Header } from './components/'
 
 import { DEFAULT_PAYLOAD } from './lib/appConstants'
 
@@ -13,10 +13,11 @@ class App extends React.Component<Props> {
   }
 
   render(): React.ReactNode {
-    const { children, loading } = this.props
+    const { children, loading, error } = this.props
     return (
       <div className="app">
         <Header />
+        {error && <Error error={error} />}
         {loading ? null : (
           <Fragment>
             <Body>{children}</Body>
