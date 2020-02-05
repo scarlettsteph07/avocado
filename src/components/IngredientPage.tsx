@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import styled from '../styled'
-import { Error, SubHeader } from './'
+import { CustomModal, Error, OptionForm, SubHeader } from './'
 import { StyledIconButton } from './styled/StyledIconButton'
 
 import { Props } from './IngredientPageContainer'
@@ -31,7 +31,12 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
 
   return (
     <IngredientPageStyles className="ingredient">
-      <SubHeader titleText={titleText} />
+      <div className="subheader__container">
+        <SubHeader titleText={titleText} />
+        <CustomModal>
+          <OptionForm />
+        </CustomModal>
+      </div>
       <div className="ingredient__styles">
         {!loading && _.isEmpty(ingredient.style) && (
           <div>No options available for {_.startCase(titleText)}</div>
@@ -59,6 +64,18 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
 }
 
 const IngredientPageStyles = styled.div`
+  .subheader {
+    margin: 0 auto;
+    &__icon {
+      background-image: none;
+    }
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
   .ingredient {
     &__styles {
       &__item {
