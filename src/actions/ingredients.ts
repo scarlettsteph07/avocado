@@ -6,6 +6,7 @@ import { AppThunk } from '../types/store'
 
 export const LOAD_INGREDIENTS = 'LOAD_INGREDIENTS'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT'
+export const ADD_STYLE = 'ADD_STYLE'
 export const REMOVE_STYLE = 'REMOVE_STYLE'
 
 interface LoadIngredientsAction {
@@ -18,6 +19,12 @@ interface AddIngredientAction {
   ingredient: Ingredient
 }
 
+interface AddStyleAction {
+  type: typeof ADD_STYLE
+  name: string
+  style: string
+}
+
 interface RemoveStyleAction {
   type: typeof REMOVE_STYLE
   name: string
@@ -27,6 +34,7 @@ interface RemoveStyleAction {
 export type IngredientsActions =
   | LoadIngredientsAction
   | AddIngredientAction
+  | AddStyleAction
   | RemoveStyleAction
 
 export const loadIngredients = (
@@ -50,6 +58,23 @@ export const handleSaveIngredient = (
   return saveIngredient(user, ingredient).then(() => {
     dispatch(addIngredient(ingredient))
   })
+}
+
+export const addStyle = (
+  name: string,
+  style: string,
+): AddStyleAction => ({
+  type: ADD_STYLE,
+  name,
+  style,
+})
+
+export const handleSaveStyle = (
+  name: string,
+  style: string,
+): AppThunk => (dispatch) => {
+  // TODO: return API call
+  dispatch(addStyle(name, style))
 }
 
 export const removeStyle = (

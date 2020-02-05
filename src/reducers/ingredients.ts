@@ -3,6 +3,7 @@
 import {
   LOAD_INGREDIENTS,
   ADD_INGREDIENT,
+  ADD_STYLE,
   REMOVE_STYLE,
   IngredientsActions,
 } from '../actions/ingredients'
@@ -28,6 +29,15 @@ export const ingredients = (
       return action.ingredients
     case ADD_INGREDIENT:
       return [...state, action.ingredient]
+    case ADD_STYLE:
+      return state.map((ingredient) =>
+        ingredient.name !== action.name
+          ? ingredient
+          : {
+              ...ingredient,
+              style: [...ingredient.style, action.style],
+            },
+      )
     case REMOVE_STYLE:
       return state.map((ingredient) =>
         ingredient.name !== action.name

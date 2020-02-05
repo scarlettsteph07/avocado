@@ -6,6 +6,8 @@ import { StyledButton } from './styled'
 
 type Props = {
   closeModal?: () => void
+  handleOnSubmit: (name: string, style: string) => void
+  ingredientName: string
 }
 
 type State = {
@@ -19,7 +21,9 @@ export class OptionForm extends React.Component<Props, State> {
 
   saveOption = (event: React.FormEvent): void => {
     event.preventDefault()
-    const { closeModal } = this.props
+    const { closeModal, handleOnSubmit, ingredientName } = this.props
+    const { styleText } = this.state
+    handleOnSubmit(ingredientName, styleText)
     closeModal && closeModal()
   }
 

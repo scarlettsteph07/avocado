@@ -3,7 +3,10 @@ import { RouteComponentProps } from 'react-router-dom'
 import _ from 'lodash'
 
 import { IngredientPage } from './'
-import { handleRemoveStyle } from '../actions/ingredients'
+import {
+  handleSaveStyle,
+  handleRemoveStyle,
+} from '../actions/ingredients'
 
 import { Ingredient } from '../types'
 
@@ -34,6 +37,7 @@ const mapStateToProps = (
 }
 
 const mapDispatchToProps = {
+  handleSaveStyle,
   handleRemoveStyle,
 }
 
