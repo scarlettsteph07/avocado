@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import styled from '../styled'
 import { APPLICATION_PATHS as PATHS } from '../lib/appConstants'
-import { CustomModal } from './'
+import { CustomModal, IngredientFormContainer } from './'
 
 import { Props } from './IngredientsGridContainer'
 
@@ -17,7 +17,9 @@ export class IngredientsGrid extends React.Component<Props, {}> {
           <h3 className="ingredients-grid__suheader__title">
             All Ingredients
           </h3>
-          <CustomModal />
+          <CustomModal>
+            <IngredientFormContainer />
+          </CustomModal>
         </div>
         <div className="ingredients-grid__container">
           {ingredients.map((ingredient, index) => {

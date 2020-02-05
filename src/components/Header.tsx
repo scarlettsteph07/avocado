@@ -22,7 +22,10 @@ export const Header: React.FunctionComponent = () => {
             />
             <h1 className="header__title">{APP_TITLE}</h1>
           </Link>
-          <Link className="header__settings" to={PATHS.INGREDIENTS}>
+          <Link
+            className="header__settings"
+            to={`/${PATHS.INGREDIENTS}`}
+          >
             <img src="/svg/icon--gear.svg" alt="settings" />
           </Link>
         </StyledSlatInner>

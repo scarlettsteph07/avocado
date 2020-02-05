@@ -32,7 +32,7 @@ export class IngredientForm extends React.Component<Props, State> {
       type,
     }
     handleSaveIngredient(ingredient)
-    closeModal()
+    closeModal && closeModal()
   }
 
   handleInputOnChange = (
@@ -94,7 +94,7 @@ export class IngredientForm extends React.Component<Props, State> {
             id="style"
             name="style"
             onChange={this.handleInputOnChange}
-            placeholder="Style"
+            placeholder="Styles"
             required
             type="text"
             value={style}
