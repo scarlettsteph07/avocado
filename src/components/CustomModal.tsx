@@ -43,15 +43,21 @@ export const CustomModal: React.FunctionComponent<Props> = ({
   )
 
   return (
-    <CustomModalStyles>
-      <OpenIconButton onClick={openModal} />
+    <CustomModalStyles className="modal">
+      <OpenIconButton
+        className="modal__icon--open"
+        onClick={openModal}
+      />
       <Modal
         contentLabel="Modal"
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <CloseIconButton onClick={closeModal} />
+        <CloseIconButton
+          className="modal__icon--close"
+          onClick={closeModal}
+        />
         {childrenWithProps}
       </Modal>
     </CustomModalStyles>

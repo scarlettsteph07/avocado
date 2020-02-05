@@ -10,6 +10,7 @@ import { Props } from './IngredientPageContainer'
 export const IngredientPage: React.FunctionComponent<Props> = ({
   ingredient,
   loading,
+  handleUpdateStyle,
   handleSaveStyle,
   handleRemoveStyle,
 }: Props) => {
@@ -37,6 +38,7 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
           <OptionForm
             handleOnSubmit={handleSaveStyle}
             ingredientName={name}
+            title="add new style"
           />
         </CustomModal>
       </div>
@@ -50,7 +52,14 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
               <div className="ingredient__styles__item" key={index}>
                 <span className="ingredients__name">{style}</span>
                 <span className="ingredient__icons">
-                  <StyledIconButton className="ingredient__icons__item ingredient__icons__item--edit" />
+                  <CustomModal>
+                    <OptionForm
+                      handleOnSubmit={handleUpdateStyle}
+                      ingredientName={name}
+                      styleName={style}
+                      title="update style"
+                    />
+                  </CustomModal>
                   <StyledIconButton
                     className="ingredient__icons__item ingredient__icons__item--remove"
                     onClick={() => removeOption(name, style)}
@@ -89,7 +98,7 @@ const IngredientPageStyles = styled.div`
         align-items: center;
         :hover span {
           display: flex;
-          display: flex;
+          align-items: center;
           justify-content: space-around;
         }
       }
@@ -97,10 +106,10 @@ const IngredientPageStyles = styled.div`
     &__icons {
       width: 120px;
       display: none;
+      .modal__icon--open {
+        background-image: url(/svg/icon--pencil.svg);
+      }
       &__item {
-        &--edit {
-          background-image: url(/svg/icon--pencil.svg);
-        }
         &--remove {
           background-image: url(/svg/icon--minus.svg);
         }

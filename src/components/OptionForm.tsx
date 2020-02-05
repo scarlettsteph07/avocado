@@ -6,8 +6,14 @@ import { StyledButton } from './styled'
 
 type Props = {
   closeModal?: () => void
-  handleOnSubmit: (name: string, style: string) => void
+  handleOnSubmit: (
+    name: string,
+    style: string,
+    oldStyle: string,
+  ) => void
   ingredientName: string
+  styleName?: string
+  title: string
 }
 
 type State = {
@@ -16,14 +22,20 @@ type State = {
 
 export class OptionForm extends React.Component<Props, State> {
   state: State = {
-    styleText: '',
+    styleText: this.props.styleName || '',
   }
 
   saveOption = (event: React.FormEvent): void => {
     event.preventDefault()
-    const { closeModal, handleOnSubmit, ingredientName } = this.props
+    const {
+      closeModal,
+      handleOnSubmit,
+      ingredientName,
+      styleName,
+    } = this.props
     const { styleText } = this.state
-    handleOnSubmit(ingredientName, styleText)
+    const oldStyle = styleName || ''
+    handleOnSubmit(ingredientName, styleText, oldStyle)
     closeModal && closeModal()
   }
 
@@ -37,15 +49,17 @@ export class OptionForm extends React.Component<Props, State> {
 
   render(): React.ReactNode {
     const { styleText } = this.state
+    const { title } = this.props
     return (
       <OptionFormStyles>
-        <SubHeader titleText="add new style" />
+        <SubHeader titleText={title} />
         <form
           action=""
           className="option__form"
           onSubmit={this.saveOption}
         >
           <input
+            autoFocus
             id="option"
             className="option__form__text-input border"
             onChange={this.handleOnChange}

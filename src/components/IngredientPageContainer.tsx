@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 import { IngredientPage } from './'
 import {
+  handleUpdateStyle,
   handleSaveStyle,
   handleRemoveStyle,
 } from '../actions/ingredients'
@@ -37,6 +38,7 @@ const mapStateToProps = (
 }
 
 const mapDispatchToProps = {
+  handleUpdateStyle,
   handleSaveStyle,
   handleRemoveStyle,
 }

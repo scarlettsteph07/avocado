@@ -80,6 +80,7 @@ export class IngredientForm extends React.Component<Props, State> {
           onSubmit={this.saveIngredient}
         >
           <input
+            autoFocus
             className="ingredient__form__text-input border"
             id="name"
             name="name"
