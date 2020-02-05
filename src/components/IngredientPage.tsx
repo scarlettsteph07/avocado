@@ -10,6 +10,7 @@ import { Props } from './IngredientPageContainer'
 export const IngredientPage: React.FunctionComponent<Props> = ({
   ingredient,
   loading,
+  handleRemoveStyle,
 }: Props) => {
   if (
     _.isUndefined(ingredient) ||
@@ -24,6 +25,10 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
       ? ''
       : ingredient.name
 
+  const removeOption = (name: string, style: string): void => {
+    handleRemoveStyle(name, style)
+  }
+
   return (
     <IngredientPageStyles className="ingredient">
       <SubHeader titleText={titleText} />
@@ -35,10 +40,15 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
           ingredient.style.map((style, index) => {
             return (
               <div className="ingredient__styles__item" key={index}>
-                {style}
+                <span className="ingredients__name">{style}</span>
                 <span className="ingredient__icons">
                   <StyledIconButton className="ingredient__icons__item ingredient__icons__item--edit" />
-                  <StyledIconButton className="ingredient__icons__item ingredient__icons__item--remove" />
+                  <StyledIconButton
+                    className="ingredient__icons__item ingredient__icons__item--remove"
+                    onClick={() =>
+                      removeOption(ingredient.name, style)
+                    }
+                  />
                 </span>
               </div>
             )

@@ -99,3 +99,28 @@ export const getUserId = (): Promise<string> => {
     }, 500)
   })
 }
+
+export const deleteStyle = (
+  name: string,
+  style: string,
+  userId: string,
+): Promise<Ingredient> => {
+  const axiosInstance = axios.create({
+    baseURL: API.DELETE.URL,
+    headers: {
+      'x-user-key': userId,
+    },
+  })
+
+  return axiosInstance
+    .delete(API.DELETE.URL, {
+      data: { name, style },
+    })
+    .then(({ data: ingredient }) => {
+      delete ingredient.userId
+      return ingredient
+    })
+    .catch((e) => {
+      throw `Unable to delete ingredient style. ${e}`
+    })
+}
