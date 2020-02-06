@@ -122,6 +122,34 @@ export const addIngredientStyle = (
     })
 }
 
+export const updateIngredientStyle = (
+  name: string,
+  style: string,
+  currentStyle: string,
+  userId: string,
+): Promise<Ingredient> => {
+  const axiosInstance = axios.create({
+    baseURL: API.UPDATE_STYLE.URL,
+    headers: {
+      'x-user-key': userId,
+    },
+  })
+
+  return axiosInstance
+    .put(API.UPDATE_STYLE.URL, {
+      name,
+      style,
+      currentStyle,
+    })
+    .then(({ data: ingredient }) => {
+      delete ingredient.userId
+      return ingredient
+    })
+    .catch((e) => {
+      throw `Unable to update ingredient style. ${e}`
+    })
+}
+
 export const deleteStyle = (
   name: string,
   style: string,

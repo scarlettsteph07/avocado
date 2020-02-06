@@ -21,6 +21,10 @@ export const API = {
     URL: 'https://api.toastandavocado.xyz/v1/ingredients/styles',
     METHOD: 'POST',
   },
+  UPDATE_STYLE: {
+    URL: 'https://api.toastandavocado.xyz/v1/ingredients/styles',
+    METHOD: 'PUT',
+  },
 }
 
 export const APPLICATION_PATHS = {

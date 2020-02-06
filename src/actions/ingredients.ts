@@ -1,6 +1,7 @@
 import {
   saveIngredient,
   addIngredientStyle,
+  updateIngredientStyle,
   deleteStyle,
 } from '../helpers/api'
 import { setError } from './errors'
@@ -111,9 +112,13 @@ export const handleUpdateStyle = (
   name: string,
   style: string,
   oldStyle: string,
-): AppThunk => (dispatch) => {
-  // TODO: return API call
-  dispatch(updateStyle(name, style, oldStyle))
+): AppThunk => (dispatch, getState) => {
+  const { user } = getState()
+  return updateIngredientStyle(name, style, oldStyle, user).then(
+    () => {
+      dispatch(updateStyle(name, style, oldStyle))
+    },
+  )
 }
 
 export const removeStyle = (
