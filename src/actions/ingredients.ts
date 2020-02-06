@@ -1,4 +1,8 @@
-import { saveIngredient, deleteStyle } from '../helpers/api'
+import {
+  saveIngredient,
+  addIngredientStyle,
+  deleteStyle,
+} from '../helpers/api'
 import { setError } from './errors'
 
 import { Ingredient } from '../types/'
@@ -81,9 +85,15 @@ export const addStyle = (
 export const handleSaveStyle = (
   name: string,
   style: string,
-): AppThunk => (dispatch) => {
-  // TODO: return API call
-  dispatch(addStyle(name, style))
+): AppThunk => (dispatch, getState) => {
+  const { user } = getState()
+  return addIngredientStyle(name, style, user)
+    .then(() => {
+      dispatch(addStyle(name, style))
+    })
+    .catch((e) => {
+      dispatch(setError(e))
+    })
 }
 
 export const updateStyle = (

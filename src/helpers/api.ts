@@ -100,6 +100,28 @@ export const getUserId = (): Promise<string> => {
   })
 }
 
+export const addIngredientStyle = (
+  name: string,
+  style: string,
+  userId: string,
+): Promise<Ingredient> => {
+  const axiosInstance = axios.create({
+    baseURL: API.NEW_STYLE.URL,
+    headers: {
+      'x-user-key': userId,
+    },
+  })
+  return axiosInstance
+    .post(API.NEW_STYLE.URL, { name, style })
+    .then(({ data: ingredient }) => {
+      delete ingredient.userId
+      return ingredient
+    })
+    .catch((e) => {
+      throw `Unable to add ingredient style. ${e}`
+    })
+}
+
 export const deleteStyle = (
   name: string,
   style: string,

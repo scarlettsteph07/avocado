@@ -17,6 +17,10 @@ export const API = {
     URL: 'https://api.toastandavocado.xyz/v1/ingredients',
     METHOD: 'DELETE',
   },
+  NEW_STYLE: {
+    URL: 'https://api.toastandavocado.xyz/v1/ingredients/styles',
+    METHOD: 'POST',
+  },
 }
 
 export const APPLICATION_PATHS = {
