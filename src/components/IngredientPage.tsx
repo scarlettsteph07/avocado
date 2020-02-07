@@ -1,72 +1,69 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 import _ from 'lodash'
-import axios from 'axios'
 
 import styled from '../styled'
-import { SubHeader } from './SubHeader'
-import { API, API_DEV_USER } from '../lib/appConstants'
+import { CustomModal, Error, OptionForm, SubHeader } from './'
 import { StyledIconButton } from './styled/StyledIconButton'
 
-type Props = {}
+import { Props } from './IngredientPageContainer'
 
-export const IngredientPage: React.FunctionComponent<Props> = () => {
-  const initialIngredientData = {
-    name: '',
-    required: false,
-    style: [],
-    type: [],
+export const IngredientPage: React.FunctionComponent<Props> = ({
+  ingredient,
+  loading,
+  handleUpdateStyle,
+  handleSaveStyle,
+  handleRemoveStyle,
+}: Props) => {
+  if (
+    _.isUndefined(ingredient) ||
+    _.isEmpty(ingredient) ||
+    _.isNil(ingredient)
+  ) {
+    return <Error error="ingredient not found" />
   }
-  const [ingredient, setIngredient] = useState({
-    ...initialIngredientData,
-  })
-  const [isLoading, setIsLoading] = useState(true)
-  const { ingredientId } = useParams()
 
-  useEffect(() => {
-    const axiosInstance = axios.create({
-      baseURL: API.ALL.URL,
-      headers: {
-        'x-user-key': API_DEV_USER,
-      },
-    })
-    isLoading &&
-      axiosInstance
-        .get(API.ALL.URL)
-        .then((response) => {
-          const ingredientsOptions = _.filter(response.data, [
-            'name',
-            ingredientId,
-          ])
-          const hasOptions =
-            !_.isEmpty(ingredientsOptions) &&
-            !_.isNil(ingredientsOptions)
-          hasOptions && setIngredient(_.head(ingredientsOptions))
-          setIsLoading(false)
-        })
-        .catch((error) => console.log(error))
-  })
+  const { name } = ingredient
 
-  const titleText =
-    _.isEmpty(ingredientId) || _.isNil(ingredientId)
-      ? ''
-      : ingredientId
+  const titleText = _.isEmpty(name) || _.isNil(name) ? '' : name
+
+  const removeOption = (name: string, style: string): void => {
+    handleRemoveStyle(name, style)
+  }
 
   return (
     <IngredientPageStyles className="ingredient">
-      <SubHeader titleText={titleText} />
+      <div className="subheader__container">
+        <SubHeader titleText={titleText} />
+        <CustomModal>
+          <OptionForm
+            handleOnSubmit={handleSaveStyle}
+            ingredientName={name}
+            title="add new style"
+          />
+        </CustomModal>
+      </div>
       <div className="ingredient__styles">
-        {!isLoading && _.isEmpty(ingredient.style) && (
+        {!loading && _.isEmpty(ingredient.style) && (
           <div>No options available for {_.startCase(titleText)}</div>
         )}
         {ingredient &&
           ingredient.style.map((style, index) => {
             return (
               <div className="ingredient__styles__item" key={index}>
-                {style}
+                <span className="ingredients__name">{style}</span>
                 <span className="ingredient__icons">
-                  <StyledIconButton className="ingredient__icons__item ingredient__icons__item--edit" />
-                  <StyledIconButton className="ingredient__icons__item ingredient__icons__item--remove" />
+                  <CustomModal>
+                    <OptionForm
+                      handleOnSubmit={handleUpdateStyle}
+                      ingredientName={name}
+                      styleName={style}
+                      title="update style"
+                    />
+                  </CustomModal>
+                  <StyledIconButton
+                    className="ingredient__icons__item ingredient__icons__item--remove"
+                    onClick={() => removeOption(name, style)}
+                  />
                 </span>
               </div>
             )
@@ -77,6 +74,18 @@ export const IngredientPage: React.FunctionComponent<Props> = () => {
 }
 
 const IngredientPageStyles = styled.div`
+  .subheader {
+    margin: 0 auto;
+    &__icon {
+      background-image: none;
+    }
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
   .ingredient {
     &__styles {
       &__item {
@@ -89,7 +98,7 @@ const IngredientPageStyles = styled.div`
         align-items: center;
         :hover span {
           display: flex;
-          display: flex;
+          align-items: center;
           justify-content: space-around;
         }
       }
@@ -97,10 +106,10 @@ const IngredientPageStyles = styled.div`
     &__icons {
       width: 120px;
       display: none;
+      .modal__icon--open {
+        background-image: url(/svg/icon--pencil.svg);
+      }
       &__item {
-        &--edit {
-          background-image: url(/svg/icon--pencil.svg);
-        }
         &--remove {
           background-image: url(/svg/icon--minus.svg);
         }

@@ -7,7 +7,7 @@ import {
 
 import {
   IngredientsGridContainer,
-  IngredientPage,
+  IngredientPageContainer,
   RecipeContainer,
 } from './components/'
 import { AppContainer } from './AppContainer'
@@ -40,7 +40,7 @@ export const AppRouter = () => {
           path={`/${PATHS.INGREDIENTS}/:ingredientId`}
           render={(props) => (
             <AppContainer {...props}>
-              <IngredientPage {...props} />
+              <IngredientPageContainer {...props} />
             </AppContainer>
           )}
         />

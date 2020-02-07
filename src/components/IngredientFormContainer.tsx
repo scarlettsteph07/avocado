@@ -24,7 +24,7 @@ const connector = connect(
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type Props = PropsFromRedux & {
-  closeModal: () => void
+  closeModal?: () => void
 }
 
 export const IngredientFormContainer = connector(IngredientForm)

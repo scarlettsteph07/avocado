@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 
 import styled from '../styled'
-import { IngredientFormContainer } from './'
-import { StyledIconButton } from './styled/'
+import { StyledIconButton } from './styled'
 
-type Props = {}
+type Props = {
+  children: JSX.Element
+}
 
-export const CustomModal: React.FunctionComponent<Props> = () => {
+export const CustomModal: React.FunctionComponent<Props> = ({
+  children,
+}: Props) => {
   Modal.setAppElement('#root')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -35,17 +38,27 @@ export const CustomModal: React.FunctionComponent<Props> = () => {
     },
   }
 
+  const childrenWithProps = React.Children.map(children, (child) =>
+    React.cloneElement(child, { closeModal: closeModal }),
+  )
+
   return (
-    <CustomModalStyles>
-      <OpenIconButton onClick={openModal} />
+    <CustomModalStyles className="modal">
+      <OpenIconButton
+        className="modal__icon--open"
+        onClick={openModal}
+      />
       <Modal
         contentLabel="Modal"
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <CloseIconButton onClick={closeModal} />
-        <IngredientFormContainer closeModal={closeModal} />
+        <CloseIconButton
+          className="modal__icon--close"
+          onClick={closeModal}
+        />
+        {childrenWithProps}
       </Modal>
     </CustomModalStyles>
   )

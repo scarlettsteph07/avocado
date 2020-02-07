@@ -1,9 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
 
 import styled from '../styled'
 import { APPLICATION_PATHS as PATHS } from '../lib/appConstants'
-import { CustomModal } from './'
+import { CustomModal, IngredientFormContainer } from './'
 
 import { Props } from './IngredientsGridContainer'
 
@@ -16,20 +17,22 @@ export class IngredientsGrid extends React.Component<Props, {}> {
           <h3 className="ingredients-grid__suheader__title">
             All Ingredients
           </h3>
-          <CustomModal />
+          <CustomModal>
+            <IngredientFormContainer />
+          </CustomModal>
         </div>
         <div className="ingredients-grid__container">
           {ingredients.map((ingredient, index) => {
             return (
-              <a
+              <Link
                 className="ingredients-grid__item"
                 key={index}
-                href={`/${PATHS.INGREDIENTS}/${_.kebabCase(
+                to={`/${PATHS.INGREDIENTS}/${_.kebabCase(
                   ingredient.name,
                 )}`}
               >
                 <div>{ingredient.name}</div>
-              </a>
+              </Link>
             )
           })}
         </div>
