@@ -1,5 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable no-case-declarations */
+import { formatIngredients } from '../helpers/formatter'
+
 import {
   LOAD_INGREDIENTS,
   ADD_INGREDIENT,
@@ -27,9 +29,9 @@ export const ingredients = (
 ): IngredientsState => {
   switch (action.type) {
     case LOAD_INGREDIENTS:
-      return action.ingredients
+      return formatIngredients(action.ingredients)
     case ADD_INGREDIENT:
-      return [...state, action.ingredient]
+      return formatIngredients([...state, action.ingredient])
     case ADD_STYLE:
       return state.map((ingredient) =>
         ingredient.name !== action.name

@@ -4,6 +4,8 @@ import _ from 'lodash'
 import styled from '../styled'
 import { SubHeader } from './'
 import { StyledButton } from './styled/'
+import { formatFormIngredient } from '../helpers/formatter'
+
 import { Props } from './IngredientFormContainer'
 
 interface State {
@@ -31,7 +33,7 @@ export class IngredientForm extends React.Component<Props, State> {
       style: style.split(','),
       type,
     }
-    handleSaveIngredient(ingredient)
+    handleSaveIngredient(formatFormIngredient(ingredient))
     closeModal && closeModal()
   }
 

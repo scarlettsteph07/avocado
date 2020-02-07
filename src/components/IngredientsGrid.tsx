@@ -31,7 +31,7 @@ export class IngredientsGrid extends React.Component<Props, {}> {
                   ingredient.name,
                 )}`}
               >
-                <div>{ingredient.name}</div>
+                <div>{_.startCase(ingredient.name)}</div>
               </Link>
             )
           })}
@@ -57,13 +57,17 @@ const IngredientsGridStyles = styled.div`
       display: flex;
       flex-flow: row;
       flex-wrap: wrap;
-      border: 1px solid ${({ theme }) => theme.textPrimary};
+      margin-top: -2px;
+      margin-left: -2px;
+      border-left: 2px solid ${({ theme }) => theme.textPrimary};
     }
     &__item {
-      width: 25%;
+      width: 24%;
       height: 100px;
       text-align: center;
-      border: 1px solid ${({ theme }) => theme.textPrimary};
+      outline: 2px solid ${({ theme }) => theme.textPrimary};
+      margin-top: 2px;
+      margin-left: 2px;
       box-sizing: border-box;
       text-decoration: none;
       font-size: 20px;

@@ -44,7 +44,7 @@ export const Settings: React.FunctionComponent<Props> = ({
             <Picker
               dropdownTitle="diet preference"
               onChange={handleDietPreferencesOnChange}
-              value={dietPreference}
+              value={_.startCase(dietPreference)}
               wheelsData={DIET_PREFERENCES}
             />
           </div>
@@ -54,7 +54,7 @@ export const Settings: React.FunctionComponent<Props> = ({
               dropdownTitle="number of ingredients"
               onChange={handleIngredientsOnChange}
               value={numOfIngredients}
-              wheelsData={['1', '2', '3', '4', '5', '6']}
+              wheelsData={['3', '4', '5', '6']}
             />
           </div>
         </StyledSlatInner>

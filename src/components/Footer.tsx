@@ -10,8 +10,7 @@ export const Footer: React.FunctionComponent<{}> = () => {
     <FooterStyles className="footer">
       <StyledSlatOuter>
         <StyledSlatInner className="footer__inner">
-          &copy; {currentTime.getFullYear()} {APP_TITLE}. All Rights
-          Reserved.
+          {APP_TITLE} &copy; {currentTime.getFullYear()}
         </StyledSlatInner>
       </StyledSlatOuter>
     </FooterStyles>

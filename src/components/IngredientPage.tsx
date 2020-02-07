@@ -23,6 +23,7 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
   }
 
   const { name } = ingredient
+  const isAvocado = name === 'avocado'
 
   const titleText = _.isEmpty(name) || _.isNil(name) ? '' : name
 
@@ -34,13 +35,15 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
     <IngredientPageStyles className="ingredient">
       <div className="subheader__container">
         <SubHeader titleText={titleText} />
-        <CustomModal>
-          <OptionForm
-            handleOnSubmit={handleSaveStyle}
-            ingredientName={name}
-            title="add new style"
-          />
-        </CustomModal>
+        {!isAvocado && (
+          <CustomModal>
+            <OptionForm
+              handleOnSubmit={handleSaveStyle}
+              ingredientName={name}
+              title="add new style"
+            />
+          </CustomModal>
+        )}
       </div>
       <div className="ingredient__styles">
         {!loading && _.isEmpty(ingredient.style) && (
@@ -50,21 +53,25 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
           ingredient.style.map((style, index) => {
             return (
               <div className="ingredient__styles__item" key={index}>
-                <span className="ingredients__name">{style}</span>
-                <span className="ingredient__icons">
-                  <CustomModal>
-                    <OptionForm
-                      handleOnSubmit={handleUpdateStyle}
-                      ingredientName={name}
-                      styleName={style}
-                      title="update style"
-                    />
-                  </CustomModal>
-                  <StyledIconButton
-                    className="ingredient__icons__item ingredient__icons__item--remove"
-                    onClick={() => removeOption(name, style)}
-                  />
+                <span className="ingredients__name">
+                  {_.startCase(style)}
                 </span>
+                {!isAvocado && (
+                  <span className="ingredient__icons">
+                    <CustomModal>
+                      <OptionForm
+                        handleOnSubmit={handleUpdateStyle}
+                        ingredientName={name}
+                        styleName={style}
+                        title="update style"
+                      />
+                    </CustomModal>
+                    <StyledIconButton
+                      className="ingredient__icons__item ingredient__icons__item--remove"
+                      onClick={() => removeOption(name, style)}
+                    />
+                  </span>
+                )}
               </div>
             )
           })}
