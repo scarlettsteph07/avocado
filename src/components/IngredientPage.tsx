@@ -31,6 +31,8 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
     handleRemoveStyle(name, style)
   }
 
+  const isLastStyle = ingredient.style.length === 1
+
   return (
     <IngredientPageStyles className="ingredient">
       <div className="subheader__container">
@@ -69,6 +71,7 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
                     <StyledIconButton
                       className="ingredient__icons__item ingredient__icons__item--remove"
                       onClick={() => removeOption(name, style)}
+                      disabled={isLastStyle}
                     />
                   </span>
                 )}
@@ -119,6 +122,10 @@ const IngredientPageStyles = styled.div`
       &__item {
         &--remove {
           background-image: url(/svg/icon--minus.svg);
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
         }
       }
     }
