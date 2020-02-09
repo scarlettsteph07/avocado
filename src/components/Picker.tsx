@@ -5,7 +5,7 @@ import styled from '../styled'
 
 interface Props {
   dropdownTitle: string
-  wheelsData: Array<string> | Array<number>
+  wheelsData: Array<string>
   value: string | number
   onChange: Function
 }
@@ -13,11 +13,14 @@ interface Props {
 export class Picker extends React.Component<Props, {}> {
   componentDidMount = (): void => {
     const { dropdownTitle, wheelsData, onChange } = this.props
+    const formattedWheelsData = wheelsData.map((datum) =>
+      _.startCase(datum),
+    )
     const MobileSelect = require('mobile-select')
     const picker = new MobileSelect({
       trigger: `#${_.kebabCase(dropdownTitle)}`,
       title: _.upperCase(dropdownTitle),
-      wheels: [{ data: wheelsData }],
+      wheels: [{ data: formattedWheelsData }],
       ensureBtnText: 'Confirm',
       cancelBtnText: 'Cancel',
       callback: (

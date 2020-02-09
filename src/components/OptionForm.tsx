@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 
 import styled from '../styled'
 import { SubHeader } from './'
@@ -35,7 +36,11 @@ export class OptionForm extends React.Component<Props, State> {
     } = this.props
     const { styleText } = this.state
     const oldStyle = styleName || ''
-    handleOnSubmit(ingredientName, styleText, oldStyle)
+    handleOnSubmit(
+      _.lowerCase(ingredientName),
+      _.lowerCase(styleText),
+      _.lowerCase(oldStyle),
+    )
     closeModal && closeModal()
   }
 
@@ -65,7 +70,7 @@ export class OptionForm extends React.Component<Props, State> {
             onChange={this.handleOnChange}
             placeholder="Style"
             type="text"
-            value={styleText}
+            value={_.startCase(styleText)}
           />
           <StyledButton className="option__form__submit">
             Submit

@@ -11,7 +11,11 @@ export type RecipeIngredient = {
   style: string
 }
 
-export type DietPreference = 'carnivore' | 'vegan' | 'vegetarian'
+export type DietPreference =
+  | 'carnivore'
+  | 'vegan'
+  | 'vegetarian'
+  | string
 
 export type Payload = {
   dietPreference: DietPreference

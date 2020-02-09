@@ -1,4 +1,5 @@
 import { fetchRecipeIngredients } from '../helpers/api'
+import { formatRecipePayload } from '../helpers/formatter'
 
 import { RecipeIngredient, Payload } from '../types/'
 import { AppThunk } from '../types/store'
@@ -24,7 +25,10 @@ export const handleFetchRecipe = (payload: Payload): AppThunk => (
   getState,
 ) => {
   const { user } = getState()
-  return fetchRecipeIngredients(user, payload).then((recipe) => {
+  return fetchRecipeIngredients(
+    user,
+    formatRecipePayload(payload),
+  ).then((recipe) => {
     dispatch(loadRecipe(recipe))
   })
 }

@@ -47,14 +47,18 @@ export const fetchInitialData = (
   userId: string,
   data: Payload,
 ): Promise<InitialData> => {
-  return Promise.all([
-    fetchRecipeIngredients(userId, data),
-    fetchAllIngredients(userId),
-  ]).then(([recipe, ingredients]) => {
-    return {
-      recipe,
-      ingredients,
-    }
+  let initialData: InitialData
+  return fetchRecipeIngredients(userId, data).then((recipe) => {
+    return fetchAllIngredients(userId)
+      .then((ingredients) => {
+        initialData = {
+          recipe,
+          ingredients,
+        }
+      })
+      .then(() => {
+        return initialData
+      })
   })
 }
 
