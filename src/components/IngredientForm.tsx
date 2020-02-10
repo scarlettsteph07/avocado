@@ -75,7 +75,10 @@ export class IngredientForm extends React.Component<Props, State> {
     const { name, style, type, required } = this.state
     return (
       <IngredientFormStyles>
-        <SubHeader titleText="add new ingredient" />
+        <SubHeader
+          titleText="add new ingredient"
+          showBackButton={false}
+        />
         <form
           action=""
           className="ingredient__form"
@@ -169,9 +172,6 @@ export class IngredientForm extends React.Component<Props, State> {
 }
 
 const IngredientFormStyles = styled.div`
-  .subheader__icon {
-    background-image: none;
-  }
   .border {
     width: 70%;
     min-height: 45px;

@@ -57,7 +57,7 @@ export class OptionForm extends React.Component<Props, State> {
     const { title } = this.props
     return (
       <OptionFormStyles>
-        <SubHeader titleText={title} />
+        <SubHeader titleText={title} showBackButton={false} />
         <form
           action=""
           className="option__form"
@@ -70,7 +70,7 @@ export class OptionForm extends React.Component<Props, State> {
             onChange={this.handleOnChange}
             placeholder="Style"
             type="text"
-            value={_.startCase(styleText)}
+            value={styleText}
           />
           <StyledButton className="option__form__submit">
             Submit
@@ -82,10 +82,6 @@ export class OptionForm extends React.Component<Props, State> {
 }
 
 const OptionFormStyles = styled.div`
-  .subheader__icon {
-    background-image: none;
-  }
-
   .border {
     width: 70%;
     min-height: 45px;

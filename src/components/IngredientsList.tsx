@@ -26,7 +26,14 @@ export const IngredientsList: React.FunctionComponent<Props> = ({
         <StyledSlatInner className="ingredients__inner">
           {_.map(ingredients, (ingredient, i) => (
             <div key={i} className="ingredients__list-item">
-              <span>{_.startCase(ingredient.style)}</span>
+              <div className="ingredient">
+                <span className="ingredient__name">
+                  {_.startCase(ingredient.name)}:
+                </span>
+                <span className="ingredient__style">
+                  {_.startCase(ingredient.style)}
+                </span>
+              </div>
               <StyledButton
                 className="ingredients__list-item__remove-button"
                 onClick={() =>
@@ -54,6 +61,14 @@ const IngredientsListStyles = styled.div`
   flex-flow: column;
   align-items: flex-start;
 
+  .ingredient {
+    display: flex;
+    flex-flow: column;
+    &__name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
   .ingredients {
     &__inner {
       display: flex;
@@ -65,7 +80,7 @@ const IngredientsListStyles = styled.div`
     }
     &__list-item {
       width: 100%;
-      height: 25px;
+      height: 50px;
       padding-bottom: 25px;
       display: flex;
       justify-content: space-between;
