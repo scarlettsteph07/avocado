@@ -88,17 +88,10 @@ const IngredientsListStyles = styled.div`
       @media (min-width: ${({ theme }) => theme.devices.tablet}) {
         height: 60px;
       }
-      :after {
-        border-bottom: 1px solid blue;
-      }
-      :hover::after {
-        border-bottom: 1px solid green;
-      }
       :hover button {
         display: inline;
         animation: ${slide} 0.7s forwards;
       }
-
       &__remove-button {
         width: auto;
         height: 100%;
