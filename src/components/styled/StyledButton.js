@@ -27,10 +27,12 @@ export const StyledButton = styled.button`
   text-decoration: none;
   margin: 0 auto 0 0;
   height: 35px;
-  &:hover {
-    color: ${({ theme }) => theme.textPrimary};
-    box-shadow: inset 0px 0px 0px 2px
-      ${({ theme }) => theme.textPrimary};
-    background-color: ${({ theme }) => theme.transparent};
+  @media (hover) {
+    &:hover {
+      color: ${({ theme }) => theme.textPrimary};
+      box-shadow: inset 0px 0px 0px 2px
+        ${({ theme }) => theme.textPrimary};
+      background-color: ${({ theme }) => theme.transparent};
+    }
   }
 `

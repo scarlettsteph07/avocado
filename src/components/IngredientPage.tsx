@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import { keyframes } from '@emotion/core'
 
 import styled from '../styled'
 import { CustomModal, Error, OptionForm, SubHeader } from './'
@@ -55,9 +56,9 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
           ingredient.style.map((style, index) => {
             return (
               <div className="ingredient__styles__item" key={index}>
-                <span className="ingredients__name">
+                <div className="ingredient__name">
                   {_.startCase(style)}
-                </span>
+                </div>
                 {!isAvocado && (
                   <span className="ingredient__icons">
                     <CustomModal>
@@ -83,6 +84,10 @@ export const IngredientPage: React.FunctionComponent<Props> = ({
   )
 }
 
+const slide = keyframes`
+  100% { right: 0; }
+`
+
 const IngredientPageStyles = styled.div`
   .subheader {
     margin: 0 auto;
@@ -97,6 +102,11 @@ const IngredientPageStyles = styled.div`
   }
 
   .ingredient {
+    &__name {
+      height: 25px;
+      white-space: normal;
+      overflow: visible;
+    }
     &__styles {
       &__item {
         width: 100%;
@@ -106,10 +116,19 @@ const IngredientPageStyles = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
+        span {
+          position: absolute;
+          right: -100px;
+          display: none;
+          height: 100%;
+          max-height: 32px;
+        }
         :hover span {
           display: flex;
           align-items: center;
           justify-content: space-around;
+          animation: ${slide} 0.7s forwards;
         }
       }
     }
