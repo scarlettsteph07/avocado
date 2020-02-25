@@ -23,8 +23,8 @@ class App extends React.Component<Props> {
             className="loading-animation"
             type="spinningBubbles"
             color="#202020"
-            height={160}
-            width={160}
+            height={100}
+            width={100}
           />
         )}
         {error && <Error error={error} />}
