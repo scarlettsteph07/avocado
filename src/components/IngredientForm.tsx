@@ -72,7 +72,7 @@ export class IngredientForm extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
-    const { name, style, type, required } = this.state
+    const { name, style, type } = this.state
     return (
       <IngredientFormStyles>
         <SubHeader
@@ -136,30 +136,6 @@ export class IngredientForm extends React.Component<Props, State> {
                 type="checkbox"
               />
               <label htmlFor="vegan">Vegan</label>
-            </div>
-          </fieldset>
-
-          <fieldset className="ingredient__form__option border">
-            <legend>Required</legend>
-            <div className="ingredient__form__option__item">
-              <input
-                checked={required}
-                id="yes"
-                name="required"
-                onChange={this.handleRadioOnChange}
-                type="radio"
-              />
-              <label htmlFor="yes">Yes</label>
-            </div>
-            <div className="ingredient__form__option__item">
-              <input
-                checked={!required}
-                id="no"
-                name="required"
-                onChange={this.handleRadioOnChange}
-                type="radio"
-              />
-              <label htmlFor="no">No</label>
             </div>
           </fieldset>
           <StyledButton className="ingredient__form__submit">
